@@ -1026,6 +1026,40 @@
             font-size: 1rem;
         }
 
+        /* Instructor Social Links */
+        .instructor-socials {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .instructor-social-link {
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .instructor-social-link:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 212, 255, 0.35);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.12);
+            color: var(--accent-cyan);
+        }
+
+        .instructor-social-link svg {
+            width: 20px;
+            height: 20px;
+        }
+
         .highlights-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 1.3rem;
@@ -1226,6 +1260,38 @@
                 <div class="instructor-name-section">
                     <h2 class="instructor-name">Varun Tyagi</h2>
                     <p class="instructor-title">Director of Data & AI | Automation Enthusiast | Early GenAI Adopter</p>
+
+                    <div class="instructor-socials" aria-label="Instructor social links">
+                        <a class="instructor-social-link" href="https://www.linkedin.com/in/varuntyagi83" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <!-- LinkedIn -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.49 1c1.38 0 2.49 1.12 2.49 2.5ZM0.5 23.5h4V8h-4v15.5ZM8.5 8h3.83v2.12h.05c.53-1 1.84-2.12 3.78-2.12 4.04 0 4.78 2.66 4.78 6.12V23.5h-4v-7.63c0-1.82-.03-4.15-2.53-4.15-2.53 0-2.92 1.97-2.92 4.02v7.76h-4V8Z"/>
+                            </svg>
+                        </a>
+
+                        <a class="instructor-social-link" href="https://www.meetvaruntyagi.com" target="_blank" rel="noopener noreferrer" aria-label="Portfolio website">
+                            <!-- Globe -->
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 12H22" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 2C14.76 4.74 16.5 8.2 16.5 12C16.5 15.8 14.76 19.26 12 22C9.24 19.26 7.5 15.8 7.5 12C7.5 8.2 9.24 4.74 12 2Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </a>
+
+                        <a class="instructor-social-link" href="https://github.com/varuntyagi83" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <!-- GitHub -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 0.5C5.37 0.5 0 5.87 0 12.5C0 17.8 3.44 22.29 8.21 23.88C8.81 24 9.03 23.63 9.03 23.31C9.03 23.02 9.02 22.24 9.02 21.41C6 21.97 5.22 20.68 4.98 20C4.84 19.64 4.24 18.53 3.71 18.23C3.28 18 2.67 17.43 3.7 17.41C4.67 17.39 5.36 18.3 5.58 18.65C6.68 20.5 8.44 19.97 9.14 19.65C9.25 18.86 9.57 18.33 9.92 18.03C7.25 17.73 4.46 16.7 4.46 11.87C4.46 10.5 4.95 9.38 5.76 8.5C5.63 8.2 5.2 6.98 5.88 5.35C5.88 5.35 6.93 5.02 9.02 6.43C10.03 6.15 11.11 6.01 12.19 6.01C13.27 6.01 14.35 6.15 15.36 6.43C17.45 5.01 18.5 5.35 18.5 5.35C19.18 6.98 18.75 8.2 18.62 8.5C19.43 9.38 19.92 10.49 19.92 11.87C19.92 16.71 17.12 17.73 14.45 18.03C14.9 18.41 15.3 19.15 15.3 20.3C15.3 21.95 15.29 23.27 15.29 23.31C15.29 23.64 15.51 24.01 16.12 23.88C20.56 22.29 24 17.79 24 12.5C24 5.87 18.63 0.5 12 0.5Z"/>
+                            </svg>
+                        </a>
+
+                        <a class="instructor-social-link" href="https://medium.com/@varun.tyagi83" target="_blank" rel="noopener noreferrer" aria-label="Medium">
+                            <!-- Medium -->
+                            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M2.85 7.77c-.05-.48.13-.95.48-1.28L5.4 4.04v-.36h6.44l4.98 10.93 4.38-10.93H24v.36l-1.77 1.7c-.15.11-.23.3-.2.48v12.56c-.03.18.05.37.2.48l1.73 1.7v.36h-8.7v-.36l1.79-1.74c.18-.18.18-.23.18-.48V8.58l-4.98 12.69h-.67L6.77 8.58v8.66c-.05.62.16 1.23.57 1.7l2.33 2.82v.36H2.85v-.36l2.33-2.82c.41-.47.6-1.09.52-1.7V7.77Z"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
 
