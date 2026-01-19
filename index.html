@@ -2310,6 +2310,183 @@
                     <p>Before doing anything risky, run <code>git stash</code>. It's like a safety net — you can always <code>git stash pop</code> to get your work back. Better safe than sorry!</p>
                 </div>
             </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🎯 Real-World Scenarios: When to Use Which Command</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(168,85,247,0.3);">
+                    <div class="card-icon purple">📦</div>
+                    <h3>git stash — "Emergency Pause Button"</h3>
+                    <p><strong>Scenario:</strong> You're coding a feature when your boss says "DROP EVERYTHING! Fix this bug NOW!"</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Save your half-done work instantly</span>
+<span class="command">git stash</span> <span class="flag">-m</span> <span class="string">"WIP: login feature"</span>
+
+<span class="comment"># Now fix the urgent bug...</span>
+<span class="command">git checkout</span> main
+<span class="comment"># fix, commit, push the bug fix</span>
+
+<span class="comment"># Come back to your feature</span>
+<span class="command">git checkout</span> feature/login
+<span class="command">git stash pop</span>  <span class="comment"># Your work is back!</span></pre>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent-purple); font-size: 0.85rem; margin-top: 0.5rem;">💡 Also use when: Pulling changes that might conflict, quickly testing something on another branch</p>
+                </div>
+                <div class="card" style="border-color: rgba(239,68,68,0.3);">
+                    <div class="card-icon red">⏪</div>
+                    <h3>git reset — "Undo My Commit"</h3>
+                    <p><strong>Scenario:</strong> You committed accidentally (wrong files, bad message) but HAVEN'T pushed yet.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Undo last commit, keep changes staged</span>
+<span class="command">git reset</span> <span class="flag">--soft</span> HEAD~1
+
+<span class="comment"># Undo last commit, unstage changes</span>
+<span class="command">git reset</span> <span class="flag">--mixed</span> HEAD~1
+
+<span class="comment"># ⚠️ Undo AND DELETE everything</span>
+<span class="command">git reset</span> <span class="flag">--hard</span> HEAD~1</pre>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent-red); font-size: 0.85rem; margin-top: 0.5rem;">⚠️ WARNING: Never use reset on pushed commits! Use revert instead.</p>
+                </div>
+                <div class="card" style="border-color: rgba(34,197,94,0.3);">
+                    <div class="card-icon green">↩️</div>
+                    <h3>git revert — "Safe Undo for Pushed Code"</h3>
+                    <p><strong>Scenario:</strong> A commit you pushed last week is causing bugs in production.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Find the bad commit</span>
+<span class="command">git log</span> <span class="flag">--oneline</span>
+
+<span class="comment"># Create a NEW commit that undoes it</span>
+<span class="command">git revert</span> abc123
+
+<span class="comment"># Safe to push!</span>
+<span class="command">git push</span></pre>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent-green); font-size: 0.85rem; margin-top: 0.5rem;">✅ Safe! Creates a new commit, preserves history.</p>
+                </div>
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">🔍</div>
+                    <h3>git blame — "Who Wrote This?"</h3>
+                    <p><strong>Scenario:</strong> You find confusing code and need to ask the author about it.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># See who wrote each line</span>
+<span class="command">git blame</span> filename.js
+
+<span class="comment"># Output:</span>
+<span class="output">abc12 (John 2024-01) line 1</span>
+<span class="output">def45 (Jane 2024-02) line 2</span></pre>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent-cyan); font-size: 0.85rem; margin-top: 0.5rem;">💡 Not for blaming! It's for understanding code history.</p>
+                </div>
+                <div class="card" style="border-color: rgba(245,158,11,0.3);">
+                    <div class="card-icon orange">🍒</div>
+                    <h3>git cherry-pick — "Copy One Commit"</h3>
+                    <p><strong>Scenario:</strong> A bug fix on develop needs to go to main NOW, but other commits aren't ready.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Copy ONLY that one commit</span>
+<span class="command">git checkout</span> main
+<span class="command">git cherry-pick</span> abc123
+<span class="command">git push</span></pre>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent-orange); font-size: 0.85rem; margin-top: 0.5rem;">💡 Use for: Hotfixes, backporting specific features</p>
+                </div>
+                <div class="card" style="border-color: rgba(236,72,153,0.3);">
+                    <div class="card-icon pink">📊</div>
+                    <h3>git diff — "What Did I Change?"</h3>
+                    <p><strong>Scenario:</strong> Before committing, you want to review exactly what you changed.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># See unstaged changes</span>
+<span class="command">git diff</span>
+
+<span class="comment"># See staged changes</span>
+<span class="command">git diff</span> <span class="flag">--staged</span>
+
+<span class="comment"># Compare branches</span>
+<span class="command">git diff</span> main..feature</pre>
+                        </div>
+                    </div>
+                    <p style="color: var(--accent-pink); font-size: 0.85rem; margin-top: 0.5rem;">💡 Always diff before commit to catch mistakes!</p>
+                </div>
+            </div>
+
+            <div class="analogy-box animate-on-scroll" style="border-color: rgba(168,85,247,0.4); background: linear-gradient(135deg, rgba(168,85,247,0.08) 0%, rgba(168,85,247,0.02) 100%);">
+                <div class="analogy-title" style="color: var(--accent-purple);">🎒 Git Stash Explained: Your Emergency Backpack</div>
+                <p>
+                    Think of <code>git stash</code> as quickly throwing your work into a backpack:<br><br>
+                    • <code>git stash</code> — Throw everything in the backpack<br>
+                    • <code>git stash list</code> — See all your backpacks (stash@{0}, stash@{1}, etc.)<br>
+                    • <code>git stash pop</code> — Take everything out, backpack disappears<br>
+                    • <code>git stash apply</code> — Copy things out, backpack stays<br>
+                    • <code>git stash drop stash@{0}</code> — Throw away a specific backpack<br>
+                    • <code>git stash clear</code> — Throw away ALL backpacks<br>
+                    • <code>git stash -m "label"</code> — Label your backpack so you remember!
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🔄 The Undo Cheat Sheet</h3>
+
+            <table class="comparison-table animate-on-scroll">
+                <thead>
+                    <tr>
+                        <th>Situation</th>
+                        <th>Command</th>
+                        <th>What Happens</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Discard changes in one file</td>
+                        <td><code>git checkout -- file.txt</code></td>
+                        <td>File goes back to last commit</td>
+                    </tr>
+                    <tr>
+                        <td>Unstage a file (keep changes)</td>
+                        <td><code>git reset HEAD file.txt</code></td>
+                        <td>Removes from staging, keeps edits</td>
+                    </tr>
+                    <tr>
+                        <td>Undo last commit (keep changes)</td>
+                        <td><code>git reset --soft HEAD~1</code></td>
+                        <td>Commit gone, changes staged</td>
+                    </tr>
+                    <tr>
+                        <td>Undo last commit (unstage too)</td>
+                        <td><code>git reset HEAD~1</code></td>
+                        <td>Commit gone, changes unstaged</td>
+                    </tr>
+                    <tr>
+                        <td>Completely delete last commit</td>
+                        <td><code>git reset --hard HEAD~1</code></td>
+                        <td>⚠️ Commit AND changes gone!</td>
+                    </tr>
+                    <tr>
+                        <td>Undo a pushed commit safely</td>
+                        <td><code>git revert &lt;commit-hash&gt;</code></td>
+                        <td>New commit that undoes old one</td>
+                    </tr>
+                    <tr>
+                        <td>Temporarily save work</td>
+                        <td><code>git stash</code></td>
+                        <td>Changes saved, workspace clean</td>
+                    </tr>
+                    <tr>
+                        <td>Get stashed work back</td>
+                        <td><code>git stash pop</code></td>
+                        <td>Changes restored</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
 
