@@ -2089,6 +2089,230 @@
         </div>
     </section>
 
+    <!-- SLIDE 10.5: Practical Command Scenarios -->
+    <section class="slide" id="practical-scenarios">
+        <div class="slide-content">
+            <div class="section-number">Chapter 05 (continued)</div>
+            <h2 class="section-title">🎯 When to Use Which Command? (Real Scenarios)</h2>
+            <p class="section-subtitle">
+                Practical situations you'll face daily and exactly which commands to use.
+            </p>
+
+            <h3 style="margin: 1.5rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-cyan);" class="animate-on-scroll">📦 Git Stash - Real World Uses</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">🚨</div>
+                    <h3>Scenario 1: Urgent Bug Fix Needed</h3>
+                    <p>You're working on a feature, but a critical bug needs fixing NOW on main.</p>
+                    <div class="code-block" style="margin-top: 0.75rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Save your current work (don't commit half-done code!)</span>
+<span class="command">git stash</span> <span class="flag">-m</span> <span class="string">"WIP: login feature"</span>
+
+<span class="comment"># Switch to main and fix the bug</span>
+<span class="command">git checkout</span> main
+<span class="comment"># ... fix bug, commit, push ...</span>
+
+<span class="comment"># Go back to your feature and restore work</span>
+<span class="command">git checkout</span> feature/login
+<span class="command">git stash pop</span>
+<span class="comment"># Your changes are back! Continue working.</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">🔄</div>
+                    <h3>Scenario 2: Need to Pull But Have Changes</h3>
+                    <p>You have uncommitted changes but need to pull the latest code from the team.</p>
+                    <div class="code-block" style="margin-top: 0.75rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Git won't let you pull with uncommitted changes</span>
+<span class="command">git pull</span>
+<span class="output error"># error: Your local changes would be overwritten</span>
+
+<span class="comment"># Solution: Stash first!</span>
+<span class="command">git stash</span>
+<span class="command">git pull</span>
+<span class="command">git stash pop</span>
+<span class="comment"># Now you have latest code + your changes</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">🧪</div>
+                    <h3>Scenario 3: Quick Experiment</h3>
+                    <p>Want to try something risky but not sure if it'll work.</p>
+                    <div class="code-block" style="margin-top: 0.75rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Save current state as safety net</span>
+<span class="command">git stash</span>
+
+<span class="comment"># Try your crazy experiment...</span>
+<span class="comment"># It didn't work? No problem!</span>
+
+<span class="comment"># Discard experiment, restore original</span>
+<span class="command">git checkout</span> .
+<span class="command">git stash pop</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">📋</div>
+                    <h3>Scenario 4: Started on Wrong Branch</h3>
+                    <p>Oops! You made changes on main but should've been on a feature branch.</p>
+                    <div class="code-block" style="margin-top: 0.75rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># You're on main with uncommitted changes</span>
+<span class="command">git stash</span>
+
+<span class="comment"># Create and switch to correct branch</span>
+<span class="command">git checkout</span> <span class="flag">-b</span> feature/new-thing
+
+<span class="comment"># Apply your changes here instead</span>
+<span class="command">git stash pop</span>
+<span class="comment"># Now commit on the right branch!</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-orange);" class="animate-on-scroll">🆘 "Oh No!" Emergency Scenarios</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(239,68,68,0.3);">
+                    <h3 style="color: var(--accent-red);">😱 "I committed to the wrong branch!"</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Undo last commit but keep changes</span>
+<span class="command">git reset</span> <span class="flag">--soft</span> HEAD~1
+
+<span class="comment"># Stash, switch branch, apply</span>
+<span class="command">git stash</span>
+<span class="command">git checkout</span> correct-branch
+<span class="command">git stash pop</span>
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"message"</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(239,68,68,0.3);">
+                    <h3 style="color: var(--accent-red);">😱 "I need to undo my last commit!"</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Undo commit, keep changes staged</span>
+<span class="command">git reset</span> <span class="flag">--soft</span> HEAD~1
+
+<span class="comment"># Undo commit, keep changes unstaged</span>
+<span class="command">git reset</span> HEAD~1
+
+<span class="comment"># Undo commit AND discard changes</span>
+<span class="command">git reset</span> <span class="flag">--hard</span> HEAD~1 <span class="comment">⚠️ DANGEROUS</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(239,68,68,0.3);">
+                    <h3 style="color: var(--accent-red);">😱 "I need to change my commit message!"</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Only if NOT pushed yet!</span>
+<span class="command">git commit</span> <span class="flag">--amend</span> <span class="flag">-m</span> <span class="string">"New message"</span>
+
+<span class="comment"># Add forgotten file to last commit</span>
+<span class="command">git add</span> forgotten-file.js
+<span class="command">git commit</span> <span class="flag">--amend</span> <span class="flag">--no-edit</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(239,68,68,0.3);">
+                    <h3 style="color: var(--accent-red);">😱 "I accidentally deleted a branch!"</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Find the commit hash from reflog</span>
+<span class="command">git reflog</span>
+
+<span class="comment"># Recreate branch at that commit</span>
+<span class="command">git checkout</span> <span class="flag">-b</span> branch-name abc1234</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-purple);" class="animate-on-scroll">🔧 Daily Workflow Commands</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card">
+                    <div class="card-icon green">☀️</div>
+                    <h3>Starting Your Day</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Get latest changes from team</span>
+<span class="command">git checkout</span> main
+<span class="command">git pull</span>
+
+<span class="comment"># Update your feature branch</span>
+<span class="command">git checkout</span> feature/my-work
+<span class="command">git merge</span> main</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon purple">🔍</div>
+                    <h3>Before Committing</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Review what you changed</span>
+<span class="command">git status</span>
+<span class="command">git diff</span>
+
+<span class="comment"># Stage specific files only</span>
+<span class="command">git add</span> file1.js file2.js
+<span class="comment"># Or stage everything</span>
+<span class="command">git add</span> .</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon orange">🚀</div>
+                    <h3>Ready to Share</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Commit with clear message</span>
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Add user login form"</span>
+
+<span class="comment"># Push to GitHub</span>
+<span class="command">git push</span>
+
+<span class="comment"># Then create PR on GitHub!</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon cyan">🌙</div>
+                    <h3>End of Day (Work in Progress)</h3>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Option 1: WIP commit</span>
+<span class="command">git add</span> .
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"WIP: login feature"</span>
+<span class="command">git push</span>
+
+<span class="comment"># Option 2: Just stash locally</span>
+<span class="command">git stash</span> <span class="flag">-m</span> <span class="string">"End of day WIP"</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">💡</div>
+                <div>
+                    <h4>Golden Rule: When in Doubt, Stash First!</h4>
+                    <p>Before doing anything risky, run <code>git stash</code>. It's like a safety net — you can always <code>git stash pop</code> to get your work back. Better safe than sorry!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SLIDE 10: Branching -->
     <section class="slide" id="branches">
         <div class="slide-content">
