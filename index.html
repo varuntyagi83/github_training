@@ -92,6 +92,77 @@
             background: rgba(0,212,255,0.1);
         }
 
+        /* Dropdown Menu */
+        .nav-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .nav-dropdown-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .nav-dropdown-btn:hover {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            background: rgba(0,212,255,0.1);
+        }
+
+        .nav-dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            padding-top: 0.5rem;
+            z-index: 1001;
+        }
+
+        .nav-dropdown-content-inner {
+            background: rgba(18,18,26,0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.5rem;
+            min-width: 160px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .nav-dropdown:hover .nav-dropdown-content {
+            display: block;
+        }
+
+        .nav-dropdown:hover .nav-dropdown-btn {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            background: rgba(0,212,255,0.1);
+        }
+
+        .nav-dropdown-content a {
+            display: block;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-dropdown-content a:hover {
+            color: var(--accent-cyan);
+            background: rgba(0,212,255,0.1);
+        }
+
         .progress-bar {
             position: fixed;
             top: 0;
@@ -1202,20 +1273,34 @@
     <nav class="nav">
         <div class="nav-logo">GitHub Masterclass</div>
         <div class="nav-links">
-            <a href="#hero" class="nav-link" onclick="event.preventDefault(); document.getElementById('hero').scrollIntoView({behavior: 'smooth'});">Start</a>
-            <a href="#instructor" class="nav-link" onclick="event.preventDefault(); document.getElementById('instructor').scrollIntoView({behavior: 'smooth'});">Instructor</a>
-            <a href="#agenda" class="nav-link" onclick="event.preventDefault(); document.getElementById('agenda').scrollIntoView({behavior: 'smooth'});">Agenda</a>
-            <a href="#what-is-git" class="nav-link" onclick="event.preventDefault(); document.getElementById('what-is-git').scrollIntoView({behavior: 'smooth'});">Git Basics</a>
-            <a href="#commands" class="nav-link" onclick="event.preventDefault(); document.getElementById('commands').scrollIntoView({behavior: 'smooth'});">Commands</a>
-            <a href="#branches" class="nav-link" onclick="event.preventDefault(); document.getElementById('branches').scrollIntoView({behavior: 'smooth'});">Branches</a>
-            <a href="#forking" class="nav-link" onclick="event.preventDefault(); document.getElementById('forking').scrollIntoView({behavior: 'smooth'});">Forking</a>
-            <a href="#pull-requests" class="nav-link" onclick="event.preventDefault(); document.getElementById('pull-requests').scrollIntoView({behavior: 'smooth'});">PRs</a>
-            <a href="#conflicts" class="nav-link" onclick="event.preventDefault(); document.getElementById('conflicts').scrollIntoView({behavior: 'smooth'});">Conflicts</a>
-            <a href="#github-pages" class="nav-link" onclick="event.preventDefault(); document.getElementById('github-pages').scrollIntoView({behavior: 'smooth'});">Pages</a>
-            <a href="#open-source" class="nav-link" onclick="event.preventDefault(); document.getElementById('open-source').scrollIntoView({behavior: 'smooth'});">Open Source</a>
-            <a href="#production" class="nav-link" onclick="event.preventDefault(); document.getElementById('production').scrollIntoView({behavior: 'smooth'});">Production</a>
-            <a href="#exercise" class="nav-link" onclick="event.preventDefault(); document.getElementById('exercise').scrollIntoView({behavior: 'smooth'});">Exercise</a>
-            <a href="#summary" class="nav-link" onclick="event.preventDefault(); document.getElementById('summary').scrollIntoView({behavior: 'smooth'});">Summary</a>
+            <a href="#hero" class="nav-link">Start</a>
+            <a href="#agenda" class="nav-link">Agenda</a>
+            <a href="#setup" class="nav-link">Setup</a>
+            <a href="#commands" class="nav-link">Commands</a>
+            <a href="#branches" class="nav-link">Branches</a>
+            <a href="#correct-workflow" class="nav-link">Workflow</a>
+            <a href="#pull-requests" class="nav-link">PRs</a>
+            <a href="#exercise" class="nav-link">Exercise</a>
+            <a href="#production" class="nav-link">Production</a>
+            <a href="#summary" class="nav-link">Summary</a>
+            <div class="nav-dropdown">
+                <button class="nav-dropdown-btn">More ▼</button>
+                <div class="nav-dropdown-content">
+                    <div class="nav-dropdown-content-inner">
+                        <a href="#instructor">Instructor</a>
+                        <a href="#what-is-git">Git Basics</a>
+                        <a href="#gui-alternatives">GUI Tools</a>
+                        <a href="#conflict-truth">Conflict Truth</a>
+                        <a href="#merge-scenario">Scenario</a>
+                        <a href="#forking">Forking</a>
+                        <a href="#conflicts">Conflicts</a>
+                        <a href="#github-pages">Pages</a>
+                        <a href="#open-source">Open Source</a>
+                        <a href="#secret-sauce">Pro Tips</a>
+                        <a href="#qa">Q&A</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -1223,7 +1308,7 @@
     <section class="slide hero" id="hero">
         <div class="slide-content">
             <div class="hero-badge">
-                <span>🚀</span> AI Catalyst Cohort | 3-4 Hour Masterclass
+                <span>🚀</span> AI Catalyst Cohort | 4-5 Hour Masterclass
             </div>
             <h1 class="hero-title">
                 <span class="gradient-text">GitHub</span><br>Masterclass
@@ -1342,51 +1427,55 @@
             <div class="agenda-grid animate-on-scroll">
                 <div class="agenda-item">
                     <div class="agenda-number">01</div>
-                    <div class="agenda-text">Understanding Git & GitHub<span>~30 min</span></div>
+                    <div class="agenda-text">Understanding Git & GitHub<span>~20 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">02</div>
-                    <div class="agenda-text">Setting Up Your Environment<span>~20 min</span></div>
+                    <div class="agenda-text">Setting Up (Terminal, Desktop & VS Code)<span>~20 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">03</div>
-                    <div class="agenda-text">Core Concepts & Analogies<span>~25 min</span></div>
+                    <div class="agenda-text">Core Concepts & Essential Commands<span>~30 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">04</div>
-                    <div class="agenda-text">Essential Commands Deep Dive<span>~40 min</span></div>
+                    <div class="agenda-text">Branching & The Correct Workflow<span>~25 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">05</div>
-                    <div class="agenda-text">Branching Strategies<span>~25 min</span></div>
+                    <div class="agenda-text">The Truth About Merge Conflicts<span>~20 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">06</div>
-                    <div class="agenda-text">Pull Requests Mastery<span>~30 min</span></div>
+                    <div class="agenda-text">Forking & Pull Requests<span>~25 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">07</div>
-                    <div class="agenda-text">Merging & Conflict Resolution<span>~25 min</span></div>
+                    <div class="agenda-text">Conflict Resolution & Recovery<span>~20 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">08</div>
-                    <div class="agenda-text">What Can Go Wrong<span>~15 min</span></div>
+                    <div class="agenda-text">GitHub Features (Pages, Pricing, etc.)<span>~20 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">09</div>
-                    <div class="agenda-text">Best Practices & Secret Sauce<span>~20 min</span></div>
+                    <div class="agenda-text">Open Source & Advanced Features<span>~15 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">10</div>
-                    <div class="agenda-text">Hands-On Team Exercise<span>~45 min</span></div>
+                    <div class="agenda-text">Best Practices & Pro Tips<span>~15 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">11</div>
-                    <div class="agenda-text">Summary & Resources<span>~10 min</span></div>
+                    <div class="agenda-text">Hands-On Team Exercise<span>~45 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">12</div>
-                    <div class="agenda-text">Q&A Session<span>~15 min</span></div>
+                    <div class="agenda-text">Production Deployment Strategies<span>~15 min</span></div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">13</div>
+                    <div class="agenda-text">Summary & Q&A<span>~15 min</span></div>
                 </div>
             </div>
 
@@ -1729,7 +1818,7 @@
                 <div class="code-content">
                     <pre><span class="comment"># Tell Git who you are (used in commit history)</span>
 <span class="command">git config</span> <span class="flag">--global</span> user.name <span class="string">"Your Name"</span>
-<span class="command">git config</span> <span class="flag">--global</span> user.email <span class="string">"your.email@example.com"</span>
+<span class="command">git config</span> <span class="flag">--global</span> user.email <span class="string">"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6bfa9b3b4e8a3aba7afaa86a3bea7abb6aaa3e8a5a9ab">[email&#160;protected]</a>"</span>
 
 <span class="comment"># Set default branch name to 'main' (modern standard)</span>
 <span class="command">git config</span> <span class="flag">--global</span> init.defaultBranch main
@@ -1823,7 +1912,7 @@
                             </div>
                             <div class="code-content">
                                 <pre><span class="comment"># Step 1: Generate SSH key pair</span>
-<span class="command">ssh-keygen</span> <span class="flag">-t ed25519</span> <span class="flag">-C</span> <span class="string">"your.email@example.com"</span>
+<span class="command">ssh-keygen</span> <span class="flag">-t ed25519</span> <span class="flag">-C</span> <span class="string">"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c6bfa9b3b4e8a3aba7afaa86a3bea7abb6aaa3e8a5a9ab">[email&#160;protected]</a>"</span>
 <span class="comment"># Press Enter to accept default location, then set a passphrase (optional)</span>
 
 <span class="comment"># Step 2: Start SSH agent</span>
@@ -1840,7 +1929,7 @@
 <span class="comment"># Go to GitHub → Settings → SSH Keys → New SSH Key → Paste</span>
 
 <span class="comment"># Step 6: Use SSH URL instead of HTTPS</span>
-<span class="command">git clone</span> git@github.com:username/repo.git
+<span class="command">git clone</span> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7b0bea397b0bea3bfa2b5f9b4b8ba">[email&#160;protected]</a>:username/repo.git
 <span class="comment"># Instead of: https://github.com/username/repo.git</span></pre>
                             </div>
                         </div>
@@ -1851,6 +1940,130 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: GUI Alternatives - GitHub Desktop & VS Code -->
+    <section class="slide" id="gui-alternatives">
+        <div class="slide-content">
+            <div class="section-number">Chapter 03 (continued)</div>
+            <h2 class="section-title">🖱️ Don't Like the Terminal? No Problem!</h2>
+            <p class="section-subtitle">
+                If the command line feels intimidating, there are excellent visual tools that do the same thing with buttons and menus.
+            </p>
+
+            <div class="analogy-box animate-on-scroll">
+                <div class="analogy-title">🎮 Analogy: Manual vs Automatic Transmission</div>
+                <p>
+                    Using the terminal is like driving a manual car — more control, but steeper learning curve. GUI tools are like automatic transmission — easier to start with, and you can always learn manual later. <strong>Both get you to the same destination!</strong>
+                </p>
+            </div>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(168,85,247,0.3);">
+                    <div class="card-icon purple">🖥️</div>
+                    <h3>GitHub Desktop</h3>
+                    <p><strong>Best for:</strong> Complete beginners who want the simplest experience</p>
+                    <ul style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li>✅ Visual commit history</li>
+                        <li>✅ One-click push/pull</li>
+                        <li>✅ Easy branch switching</li>
+                        <li>✅ Built-in conflict resolver</li>
+                        <li>✅ Free & official from GitHub</li>
+                    </ul>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Download from:</span>
+<span class="string">https://desktop.github.com</span>
+
+<span class="comment"># Available for:</span>
+Windows & macOS</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">💻</div>
+                    <h3>VS Code + Git Integration</h3>
+                    <p><strong>Best for:</strong> People who code and want Git built into their editor</p>
+                    <ul style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <li>✅ Source Control panel (sidebar)</li>
+                        <li>✅ Visual diff viewer</li>
+                        <li>✅ Inline conflict resolution</li>
+                        <li>✅ GitLens extension (powerful!)</li>
+                        <li>✅ Integrated terminal if needed</li>
+                    </ul>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Download from:</span>
+<span class="string">https://code.visualstudio.com</span>
+
+<span class="comment"># Recommended extension:</span>
+GitLens — Git supercharged</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🔄 Visual Comparison: Terminal vs GUI</h3>
+
+            <div class="comparison-table animate-on-scroll" style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                    <thead>
+                        <tr style="background: var(--bg-card); border-bottom: 2px solid var(--accent-cyan);">
+                            <th style="padding: 1rem; text-align: left; color: var(--text-primary);">Action</th>
+                            <th style="padding: 1rem; text-align: left; color: var(--accent-orange);">Terminal Command</th>
+                            <th style="padding: 1rem; text-align: left; color: var(--accent-purple);">GitHub Desktop</th>
+                            <th style="padding: 1rem; text-align: left; color: var(--accent-cyan);">VS Code</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">Stage changes</td>
+                            <td style="padding: 0.75rem;"><code style="color: var(--accent-orange);">git add .</code></td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Checkbox next to files</td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click + icon</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">Commit</td>
+                            <td style="padding: 0.75rem;"><code style="color: var(--accent-orange);">git commit -m "msg"</code></td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Type message + click Commit</td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Type message + click ✓</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">Push</td>
+                            <td style="padding: 0.75rem;"><code style="color: var(--accent-orange);">git push</code></td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click "Push origin"</td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click sync icon 🔄</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">Pull</td>
+                            <td style="padding: 0.75rem;"><code style="color: var(--accent-orange);">git pull</code></td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click "Fetch" then "Pull"</td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click sync icon 🔄</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border-color);">
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">Create branch</td>
+                            <td style="padding: 0.75rem;"><code style="color: var(--accent-orange);">git checkout -b name</code></td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Branch → New Branch</td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click branch name → Create</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.75rem; color: var(--text-secondary);">Resolve conflict</td>
+                            <td style="padding: 0.75rem;"><code style="color: var(--accent-orange);">Edit file manually</code></td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Visual editor with options</td>
+                            <td style="padding: 0.75rem; color: var(--text-muted);">Click "Accept" buttons</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">💡</div>
+                <div>
+                    <h4>Our Recommendation</h4>
+                    <p><strong>Start with GitHub Desktop</strong> if you're brand new. Once comfortable, try <strong>VS Code's Git panel</strong> as you'll likely be coding there anyway. Learn the <strong>terminal commands eventually</strong> — they're universal, faster for pros, and essential for advanced workflows. But there's no shame in using GUI tools — many professionals use them daily!</p>
                 </div>
             </div>
         </div>
@@ -2671,10 +2884,817 @@
         </div>
     </section>
 
+    <!-- SLIDE: The Correct Way of Working -->
+    <section class="slide" id="correct-workflow">
+        <div class="slide-content">
+            <div class="section-number">Chapter 07</div>
+            <h2 class="section-title">🎯 The Correct Way of Working with Git</h2>
+            <p class="section-subtitle">
+                Master the professional workflow that teams use every day — and understand exactly why conflicts are rare when done right.
+            </p>
+
+            <div class="analogy-box animate-on-scroll">
+                <div class="analogy-title">🏗️ Analogy: Building a House with a Team</div>
+                <p>
+                    Imagine building a house with a team: one person works on the kitchen, another on the bathroom, another on the bedroom. They each work in their own space (branch) on their own tasks (files). <strong>Do they constantly bump into each other? No!</strong> They only have a "conflict" if two people try to install different faucets in the exact same sink at the exact same time. As long as everyone works on their own area, they can work simultaneously without any issues — and when each room is done, they simply add it to the house (merge). <strong>This is exactly how Git works!</strong>
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-cyan);" class="animate-on-scroll">🔑 The Golden Rule of Professional Git Workflow</h3>
+
+            <div class="card animate-on-scroll" style="background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(168,85,247,0.1) 100%); border-color: rgba(0,212,255,0.3); padding: 2.5rem; text-align: center;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1rem; color: var(--accent-cyan);">Never Work Directly on Main</h3>
+                <p style="font-size: 1.2rem; color: var(--text-secondary);">
+                    <strong style="color: var(--text-primary);">Always create a branch</strong> → Do your work → Create a Pull Request → Merge after review
+                </p>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 12px;">
+                    <code style="font-size: 1rem; color: var(--accent-green);">main</code>
+                    <span style="color: var(--text-muted);"> = sacred, stable, production-ready</span><br>
+                    <code style="font-size: 1rem; color: var(--accent-purple);">your-branch</code>
+                    <span style="color: var(--text-muted);"> = your playground, experiment freely</span>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">📋 The Professional Daily Workflow</h3>
+
+            <div class="steps-container animate-on-scroll">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Start Fresh: Pull the Latest</h4>
+                        <p>Before starting ANY work, always get the latest changes from the team.</p>
+                        <div class="code-block" style="margin-top: 0.5rem;">
+                            <div class="code-content">
+                                <pre><span class="command">git checkout</span> main
+<span class="command">git pull</span> origin main
+<span class="comment"># Now you have everyone's latest work!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Create Your Branch</h4>
+                        <p>Make a new branch for your specific task. Name it descriptively!</p>
+                        <div class="code-block" style="margin-top: 0.5rem;">
+                            <div class="code-content">
+                                <pre><span class="command">git checkout</span> <span class="flag">-b</span> feature/add-contact-form
+<span class="comment"># You're now on your own branch, isolated from everyone else!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Do Your Work</h4>
+                        <p>Edit files, create new files, delete files — whatever your task requires.</p>
+                        <div class="code-block" style="margin-top: 0.5rem;">
+                            <div class="code-content">
+                                <pre><span class="comment"># Create/edit your files...</span>
+<span class="comment"># contact-form.html, contact-styles.css, form-handler.js</span>
+<span class="comment"># You're working in YOUR branch — nobody else is affected!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Commit Your Changes (Often!)</h4>
+                        <p>Save your progress with clear commit messages. Commit early, commit often.</p>
+                        <div class="code-block" style="margin-top: 0.5rem;">
+                            <div class="code-content">
+                                <pre><span class="command">git add</span> .
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Add contact form HTML structure"</span>
+
+<span class="comment"># Later...</span>
+<span class="command">git add</span> .
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Style contact form with CSS"</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Push to GitHub</h4>
+                        <p>Upload your branch to GitHub so it's backed up and others can see it.</p>
+                        <div class="code-block" style="margin-top: 0.5rem;">
+                            <div class="code-content">
+                                <pre><span class="command">git push</span> <span class="flag">-u</span> origin feature/add-contact-form
+<span class="comment"># First push: -u sets up tracking</span>
+<span class="comment"># After that, just: git push</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Create a Pull Request</h4>
+                        <p>On GitHub, open a PR to merge your branch into main. Team reviews your code.</p>
+                        <div style="margin-top: 0.5rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                                GitHub will show: "feature/add-contact-form → main"<br>
+                                Team reviews → Approves → You (or they) click <strong style="color: var(--accent-green);">Merge</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Clean Up & Repeat</h4>
+                        <p>Delete your merged branch and start fresh for the next task.</p>
+                        <div class="code-block" style="margin-top: 0.5rem;">
+                            <div class="code-content">
+                                <pre><span class="command">git checkout</span> main
+<span class="command">git pull</span> origin main  <span class="comment"># Get your merged changes!</span>
+<span class="command">git branch</span> <span class="flag">-d</span> feature/add-contact-form  <span class="comment"># Delete old branch</span>
+
+<span class="comment"># Ready for next task: go to Step 2!</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">⚡</div>
+                <div>
+                    <h4>The Shortcut Version</h4>
+                    <p>Once you're comfortable, the workflow becomes: <code style="color: var(--accent-cyan);">pull → branch → work → commit → push → PR → merge → repeat</code>. It becomes muscle memory!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: Why Conflicts Are RARE (The Truth About Conflicts) -->
+    <section class="slide" id="conflict-truth">
+        <div class="slide-content">
+            <div class="section-number">Chapter 08</div>
+            <h2 class="section-title">🤔 The Truth About Merge Conflicts</h2>
+            <p class="section-subtitle">
+                "Won't there always be conflicts if multiple people work on the same repo?" — <strong style="color: var(--accent-cyan);">NO!</strong> Let's debunk this myth once and for all.
+            </p>
+
+            <div class="analogy-box animate-on-scroll" style="border-color: rgba(34,197,94,0.3); background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(34,197,94,0.02) 100%);">
+                <div class="analogy-title" style="color: var(--accent-green);">🎯 The Key Insight</div>
+                <p>
+                    <strong style="color: var(--text-primary); font-size: 1.1rem;">Conflicts happen when Git can't automatically figure out how to combine changes.</strong><br><br>
+                    <span style="color: var(--accent-green);">✅ SAFE:</span> Alice edits <code>header.html</code> and Bob edits <code>footer.html</code> — <strong>Different files = No conflict!</strong><br>
+                    <span style="color: var(--accent-green);">✅ USUALLY SAFE:</span> Alice edits line 10 and Bob edits line 500 of the same large file — <strong>Far apart = Usually fine!</strong><br>
+                    <span style="color: var(--accent-orange);">⚠️ RISKY:</span> Alice and Bob both edit near line 10 of the same file — <strong>Close together = Likely conflict!</strong><br>
+                    <span style="color: var(--accent-red);">❌ CONFLICT:</span> Alice and Bob both edit the exact same line — <strong>Same line = Definite conflict!</strong>
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">📊 Visual: When Conflicts Happen vs Don't Happen</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(34,197,94,0.4);">
+                    <div class="card-icon green">✅</div>
+                    <h3 style="color: var(--accent-green);">NO Conflict: Different Files</h3>
+                    <p>The most common scenario in real teams!</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <span style="color: var(--accent-purple);">Alice's branch:</span><br>
+                            📄 Edits <code>contact.html</code><br>
+                            📄 Edits <code>contact.css</code>
+                        </div>
+                        <div>
+                            <span style="color: var(--accent-cyan);">Bob's branch:</span><br>
+                            📄 Edits <code>about.html</code><br>
+                            📄 Edits <code>about.css</code>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--border-color); color: var(--accent-green);">
+                            ✓ Both merge perfectly! Git combines all changes.
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(245,158,11,0.4);">
+                    <div class="card-icon orange">⚠️</div>
+                    <h3 style="color: var(--accent-orange);">SOMETIMES Conflict: Same File, Different Lines</h3>
+                    <p>It depends on HOW far apart!</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                        <div style="margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px dashed var(--border-color);">
+                            <span style="color: var(--accent-green);">✅ Large file, edits FAR apart:</span><br>
+                            📄 <code>style.css</code> (500 lines)<br>
+                            Alice edits lines 1-20, Bob edits lines 400-450<br>
+                            <span style="color: var(--accent-green);">→ Git merges both cleanly!</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--accent-red);">❌ Small file OR edits CLOSE together:</span><br>
+                            📄 <code>index.html</code> (10 lines)<br>
+                            Alice adds line 2, Bob adds line 5<br>
+                            <span style="color: var(--accent-red);">→ May conflict! Git needs context.</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                        <strong>Rule of thumb:</strong> If edits are within ~3 lines of each other, expect potential conflicts.
+                    </p>
+                </div>
+                <div class="card" style="border-color: rgba(34,197,94,0.4);">
+                    <div class="card-icon green">✅</div>
+                    <h3 style="color: var(--accent-green);">NO Conflict: Adding New Content</h3>
+                    <p>Adding is usually safe!</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <span style="color: var(--accent-purple);">Alice's branch:</span><br>
+                            📄 Creates <code>new-feature.html</code><br>
+                            <span style="color: var(--text-muted);">(Brand new file)</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--accent-cyan);">Bob's branch:</span><br>
+                            📄 Creates <code>another-feature.js</code><br>
+                            <span style="color: var(--text-muted);">(Brand new file)</span>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--border-color); color: var(--accent-green);">
+                            ✓ Both merge perfectly! New files just get added.
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(239,68,68,0.4);">
+                    <div class="card-icon red">⚠️</div>
+                    <h3 style="color: var(--accent-red);">CONFLICT: Same Lines, Same File</h3>
+                    <p>The ONLY case that causes conflicts!</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <span style="color: var(--accent-purple);">Alice's branch:</span><br>
+                            📄 <code>index.html</code> line 25:<br>
+                            <code style="color: var(--accent-purple);">&lt;h1&gt;Welcome!&lt;/h1&gt;</code>
+                        </div>
+                        <div>
+                            <span style="color: var(--accent-cyan);">Bob's branch:</span><br>
+                            📄 <code>index.html</code> line 25:<br>
+                            <code style="color: var(--accent-cyan);">&lt;h1&gt;Hello World!&lt;/h1&gt;</code>
+                        </div>
+                        <div style="margin-top: 1rem; padding-top: 0.5rem; border-top: 1px solid var(--border-color); color: var(--accent-red);">
+                            ⚠️ Conflict! Git asks: "Which h1 should I keep?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🎬 Real-World Example: A Team of 5 Working</h3>
+
+            <div class="diagram-container animate-on-scroll" style="background: var(--bg-code); padding: 2rem; border-radius: 16px;">
+                <h4 style="color: var(--accent-cyan); margin-bottom: 1.5rem; font-family: 'Space Grotesk', sans-serif;">Scenario: Building an E-commerce Website</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                    <div style="padding: 1rem; border-radius: 8px; border: 1px solid rgba(168,85,247,0.3); background: rgba(168,85,247,0.1);">
+                        <strong style="color: var(--accent-purple);">👤 Alice</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Branch: <code>feature/homepage</code></p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Files: index.html, home.css</p>
+                    </div>
+                    <div style="padding: 1rem; border-radius: 8px; border: 1px solid rgba(0,212,255,0.3); background: rgba(0,212,255,0.1);">
+                        <strong style="color: var(--accent-cyan);">👤 Bob</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Branch: <code>feature/cart</code></p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Files: cart.html, cart.js</p>
+                    </div>
+                    <div style="padding: 1rem; border-radius: 8px; border: 1px solid rgba(34,197,94,0.3); background: rgba(34,197,94,0.1);">
+                        <strong style="color: var(--accent-green);">👤 Carol</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Branch: <code>feature/checkout</code></p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Files: checkout.html, payment.js</p>
+                    </div>
+                    <div style="padding: 1rem; border-radius: 8px; border: 1px solid rgba(245,158,11,0.3); background: rgba(245,158,11,0.1);">
+                        <strong style="color: var(--accent-orange);">👤 Dave</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Branch: <code>feature/search</code></p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Files: search.html, search.js</p>
+                    </div>
+                    <div style="padding: 1rem; border-radius: 8px; border: 1px solid rgba(244,114,182,0.3); background: rgba(244,114,182,0.1);">
+                        <strong style="color: var(--accent-pink);">👤 Eve</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem;">Branch: <code>feature/footer</code></p>
+                        <p style="font-size: 0.8rem; color: var(--text-muted);">Files: footer.html, footer.css</p>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                    <p style="color: var(--accent-green); font-weight: 600; margin-bottom: 0.5rem;">✅ Result: ALL 5 people merge without ANY conflicts!</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Each person works on different files. Git automatically combines all their work when they merge. This is the normal, everyday reality of Git collaboration!</p>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">📈 Conflict Probability in Real Projects</h3>
+
+            <div class="card animate-on-scroll" style="padding: 2rem;">
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 200px; color: var(--text-secondary);">Different files:</span>
+                        <div style="flex: 1; height: 24px; background: var(--bg-code); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 2%; height: 100%; background: var(--accent-green);"></div>
+                        </div>
+                        <span style="color: var(--accent-green); font-weight: 600;">~0%</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 200px; color: var(--text-secondary);">Same file, different parts:</span>
+                        <div style="flex: 1; height: 24px; background: var(--bg-code); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 5%; height: 100%; background: var(--accent-cyan);"></div>
+                        </div>
+                        <span style="color: var(--accent-cyan); font-weight: 600;">~5%</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 200px; color: var(--text-secondary);">Same file, nearby lines:</span>
+                        <div style="flex: 1; height: 24px; background: var(--bg-code); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 15%; height: 100%; background: var(--accent-orange);"></div>
+                        </div>
+                        <span style="color: var(--accent-orange); font-weight: 600;">~15%</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 200px; color: var(--text-secondary);">Same exact lines:</span>
+                        <div style="flex: 1; height: 24px; background: var(--bg-code); border-radius: 4px; overflow: hidden;">
+                            <div style="width: 85%; height: 100%; background: var(--accent-red);"></div>
+                        </div>
+                        <span style="color: var(--accent-red); font-weight: 600;">~85%</span>
+                    </div>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem; text-align: center;">
+                    In well-organized teams, 90%+ of work is on different files or different parts. Conflicts are the exception, not the rule!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: How to Avoid Conflicts (Practical Tips) -->
+    <section class="slide" id="avoid-conflicts">
+        <div class="slide-content">
+            <div class="section-number">Chapter 09</div>
+            <h2 class="section-title">🛡️ How Teams Avoid Conflicts in Practice</h2>
+            <p class="section-subtitle">
+                Follow these simple practices and you'll rarely encounter conflicts.
+            </p>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card">
+                    <div class="card-icon cyan">📥</div>
+                    <h3>1. Pull Before You Start</h3>
+                    <p>Always get the latest changes before creating your branch or starting work.</p>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <div class="code-content">
+                            <pre><span class="command">git pull</span> origin main  <span class="comment"># Every morning!</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon purple">🌿</div>
+                    <h3>2. Use Feature Branches</h3>
+                    <p>Each person works on their own branch. Branches isolate your changes from others.</p>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <div class="code-content">
+                            <pre><span class="command">git checkout</span> <span class="flag">-b</span> feature/my-task</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon green">⏱️</div>
+                    <h3>3. Keep Branches Short-Lived</h3>
+                    <p>Merge frequently! Long-running branches have more chance of conflicts.</p>
+                    <p style="color: var(--accent-green); margin-top: 0.5rem;">✓ Good: Branch → Work 1-3 days → Merge</p>
+                    <p style="color: var(--accent-red);">✗ Bad: Branch → Work 3 weeks → Merge</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon orange">🗣️</div>
+                    <h3>4. Communicate with Team</h3>
+                    <p>If you need to edit a shared file (like config), let the team know!</p>
+                    <p style="color: var(--text-muted); margin-top: 0.5rem;">"Hey team, I'm updating the main CSS file today"</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon pink">📁</div>
+                    <h3>5. Organize Files Well</h3>
+                    <p>Keep code modular. Instead of one giant file, use many smaller files.</p>
+                    <p style="color: var(--accent-red); margin-top: 0.5rem;">✗ Everything in <code>app.js</code></p>
+                    <p style="color: var(--accent-green);">✓ <code>header.js</code>, <code>footer.js</code>, <code>cart.js</code>...</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">🔄</div>
+                    <h3>6. Sync Regularly</h3>
+                    <p>Update your branch with main frequently to catch issues early.</p>
+                    <div class="code-block" style="margin-top: 1rem;">
+                        <div class="code-content">
+                            <pre><span class="command">git pull</span> origin main  <span class="comment"># While on your branch</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🔄 What Happens When You Merge (Step by Step)</h3>
+
+            <div class="diagram-container animate-on-scroll" style="background: var(--bg-code); padding: 2rem; border-radius: 16px;">
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 30px; height: 30px; background: var(--gradient-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</span>
+                        <div>
+                            <strong>You click "Merge" on your Pull Request</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">GitHub starts comparing your changes with main</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 30px; height: 30px; background: var(--gradient-main); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</span>
+                        <div>
+                            <strong>Git analyzes every file you changed</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">"Did anyone else change these same files since you branched?"</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 30px; height: 30px; background: var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3a</span>
+                        <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3); flex: 1;">
+                            <strong style="color: var(--accent-green);">No overlap → Automatic merge! ✅</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Git combines all changes. You're done!</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <span style="width: 30px; height: 30px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3b</span>
+                        <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); flex: 1;">
+                            <strong style="color: var(--accent-red);">Same lines changed → Conflict! ⚠️</strong>
+                            <p style="color: var(--text-muted); font-size: 0.9rem;">Git asks you to decide which version to keep. (We'll cover how to resolve this!)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analogy-box animate-on-scroll" style="margin-top: 2rem; border-color: rgba(168,85,247,0.3); background: linear-gradient(135deg, rgba(168,85,247,0.05) 0%, rgba(168,85,247,0.02) 100%);">
+                <div class="analogy-title" style="color: var(--accent-purple);">🎓 Key Takeaway</div>
+                <p>
+                    <strong style="color: var(--text-primary);">Branches + different files = parallel work without conflicts.</strong><br><br>
+                    Conflicts are NOT a flaw in Git — they're Git being honest when it genuinely can't decide between two different edits to the exact same content. In well-organized teams following good practices, most developers go weeks without seeing a conflict!
+                </p>
+            </div>
+
+            <div class="warning-box animate-on-scroll">
+                <div class="warning-box-icon">💡</div>
+                <div>
+                    <h4>Common Misconception Debunked</h4>
+                    <p>
+                        <strong>"I heard Git always creates conflicts when multiple people work on a project"</strong><br>
+                        This is FALSE! This misconception usually comes from people who tried Git without using branches properly, or who all worked directly on <code>main</code>. When you use branches and work on separate files or features, Git seamlessly merges everyone's work together automatically.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: The Big Question - What Happens When Someone Merges? -->
+    <section class="slide" id="merge-scenario">
+        <div class="slide-content">
+            <div class="section-number">Chapter 10</div>
+            <h2 class="section-title">🎬 The Complete Scenario: What REALLY Happens</h2>
+            <p class="section-subtitle">
+                Let's walk through the exact situation step-by-step and clear up all the confusion.
+            </p>
+
+            <div class="analogy-box animate-on-scroll" style="border-color: rgba(168,85,247,0.3); background: linear-gradient(135deg, rgba(168,85,247,0.05) 0%, rgba(168,85,247,0.02) 100%);">
+                <div class="analogy-title" style="color: var(--accent-purple);">📋 The Scenario</div>
+                <p>
+                    <strong>Person A</strong>, <strong>Person B</strong>, and <strong>Person C</strong> all pull main and create their own feature branches.<br>
+                    • Person A works on <code>file1.html</code><br>
+                    • Person B works on <code>file2.html</code><br>
+                    • Person C works on <code>file3.html</code><br><br>
+                    Person A finishes first, creates a PR, it gets approved, and merges to main.<br>
+                    <strong style="color: var(--accent-cyan);">What happens to Person B and C? Is their work lost? Do they need new branches?</strong>
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-green);" class="animate-on-scroll">✅ The Short Answer</h3>
+
+            <div class="card animate-on-scroll" style="background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.05) 100%); border-color: rgba(34,197,94,0.4); padding: 2rem;">
+                <h3 style="color: var(--accent-green); margin-bottom: 1rem;">Person B and C's work is 100% SAFE!</h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">✅ Their feature branches are <strong>completely isolated</strong> from main</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">✅ They do <strong>NOT</strong> need to create new branches</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">✅ They can continue working as if nothing happened</li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">✅ When they're ready, they just create their PR and merge</li>
+                    <li style="padding: 0.5rem 0;">✅ Git will automatically combine everyone's different files</li>
+                </ul>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🎥 Visual Timeline: What Actually Happens</h3>
+
+            <div class="diagram-container animate-on-scroll" style="background: var(--bg-code); padding: 2rem; border-radius: 16px; overflow-x: auto;">
+                <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; line-height: 2;">
+<span style="color: var(--accent-cyan);">MAIN BRANCH:</span>        ●━━━━━━━━━━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━●━━━━━━━━━━━━━━━●
+                      │                        │               │               │
+                      │ <span style="color: var(--text-muted);">Everyone pulls</span>        │ <span style="color: var(--accent-purple);">A merges</span>       │ <span style="color: var(--accent-cyan);">B merges</span>       │ <span style="color: var(--accent-green);">C merges</span>
+                      │                        │ <span style="color: var(--accent-purple);">file1.html</span>     │ <span style="color: var(--accent-cyan);">file2.html</span>     │ <span style="color: var(--accent-green);">file3.html</span>
+                      ▼                        ▲               ▲               ▲
+<span style="color: var(--accent-purple);">PERSON A's branch:</span>    ●━━━━●━━━━●━━━━●━━━━━━━━┘               │               │
+                      <span style="color: var(--text-muted);">creates  commits  PR+merge</span>              │               │
+                      <span style="color: var(--text-muted);">branch   work     (done!)</span>               │               │
+                                                               │               │
+<span style="color: var(--accent-cyan);">PERSON B's branch:</span>    ●━━━━━━━━●━━━━━━━━●━━━━━━━━●━━━━━━━━━━━┘               │
+                      <span style="color: var(--text-muted);">creates     commits    commits   PR+merge</span>             │
+                      <span style="color: var(--text-muted);">branch      work       more work (done!)</span>              │
+                      <span style="color: var(--accent-green);">▲ STILL SAFE! Isolated from A's merge</span>                 │
+                                                                               │
+<span style="color: var(--accent-green);">PERSON C's branch:</span>    ●━━━━━━━━━━━━●━━━━━━━━━━━━●━━━━━━━━━━━━●━━━━━━━━━━━━━━┘
+                      <span style="color: var(--text-muted);">creates        commits       commits      PR+merge</span>
+                      <span style="color: var(--text-muted);">branch         work          more work    (done!)</span>
+                      <span style="color: var(--accent-green);">▲ STILL SAFE! Isolated from A's and B's merges</span>
+                </pre>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">❓ FAQ: Answering Every Question</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card">
+                    <div class="card-icon purple">📦</div>
+                    <h3>Q: Should Person A use <code>git add .</code> or <code>git add file1.html</code>?</h3>
+                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-green);">Either works!</strong> Here's the difference:</p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <p style="margin-bottom: 0.5rem;"><code style="color: var(--accent-cyan);">git add .</code></p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Stages ALL changed files in the folder. Convenient but be careful you don't accidentally include unwanted files.</p>
+                        <p style="margin: 1rem 0 0.5rem;"><code style="color: var(--accent-purple);">git add file1.html</code></p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Stages only that specific file. More precise, good when you want to commit only certain changes.</p>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--accent-green);">✅ This choice does NOT affect Person B or C at all!</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon cyan">🔀</div>
+                    <h3>Q: After A merges, is main "new" and B/C on "old" version?</h3>
+                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-cyan);">Yes, but that's totally fine!</strong></p>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        B and C's branches were created from an older main. But since they're working on <strong>different files</strong>, Git can merge them without any issues.
+                    </p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                        <p style="color: var(--accent-green); font-size: 0.9rem;">
+                            <strong>Think of it this way:</strong> Main now has file1.html (from A). When B merges, Git adds file2.html. When C merges, Git adds file3.html. Everyone's work combines!
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-grid animate-on-scroll" style="margin-top: 1.5rem;">
+                <div class="card">
+                    <div class="card-icon green">🌿</div>
+                    <h3>Q: Do B and C need to create NEW branches after A merges?</h3>
+                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-green);">NO! Absolutely not!</strong></p>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        They continue working on their existing branches. Their branches are their own private workspace — A's merge to main doesn't touch them at all.
+                    </p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                        <p style="color: var(--accent-red); font-size: 0.9rem;">
+                            <strong>⚠️ Creating a new branch would mean starting over!</strong> Don't do this — just keep working on your existing branch.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon orange">📥</div>
+                    <h3>Q: If B does <code>git pull</code>, will their work be lost?</h3>
+                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-orange);">It depends WHERE they pull!</strong></p>
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <p style="margin-bottom: 0.5rem;"><span style="color: var(--accent-red);">❌ Wrong:</span> <code>git pull</code> while on their feature branch without specifying</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">This might try to pull from a remote branch that doesn't exist yet.</p>
+                        <p style="margin-bottom: 0.5rem;"><span style="color: var(--accent-green);">✅ Right option 1:</span> Don't pull at all — just keep working!</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">B can completely ignore that A merged. When B is ready, they create their PR.</p>
+                        <p style="margin-bottom: 0.5rem;"><span style="color: var(--accent-green);">✅ Right option 2:</span> Sync with main (optional, for long projects)</p>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;"><code>git pull origin main</code> — This brings main's changes INTO your branch. Your work is preserved!</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🔑 The Key Concept: Branches Are Isolated Universes</h3>
+
+            <div class="analogy-box animate-on-scroll">
+                <div class="analogy-title">🌍 Analogy: Parallel Universes</div>
+                <p>
+                    Imagine <strong>main</strong> is Universe Prime. When Person A, B, and C create branches, they each create their own <strong>parallel universe</strong>.<br><br>
+                    <strong>Person A</strong> finishes their work and merges back to Universe Prime. Universe Prime now has A's changes.<br><br>
+                    <strong>But Person B and C are still in their own parallel universes!</strong> They didn't feel anything. They didn't lose anything. They're happily working away.<br><br>
+                    When B is ready, they merge their universe into Prime. Git says "Oh, Prime now has A's file1 and B's file2 — great!"<br><br>
+                    When C is ready, they merge. Git says "Now Prime has file1, file2, AND file3 — everyone's work combined!"
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">💻 Exact Commands: What Each Person Types</h3>
+
+            <div class="code-block animate-on-scroll">
+                <div class="code-header">
+                    <span class="code-title">Person A's complete workflow</span>
+                    <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+                    <pre><span class="comment"># Step 1: Start fresh</span>
+<span class="command">git checkout</span> main
+<span class="command">git pull</span> origin main
+
+<span class="comment"># Step 2: Create branch</span>
+<span class="command">git checkout</span> <span class="flag">-b</span> feature/file1-updates
+
+<span class="comment"># Step 3: Do work (edit file1.html)</span>
+<span class="comment"># ... editing file1.html ...</span>
+
+<span class="comment"># Step 4: Stage and commit (either works!)</span>
+<span class="command">git add</span> file1.html          <span class="comment"># Option A: specific file</span>
+<span class="comment"># OR</span>
+<span class="command">git add</span> .                    <span class="comment"># Option B: all changes</span>
+
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Update file1 with new content"</span>
+
+<span class="comment"># Step 5: Push to GitHub</span>
+<span class="command">git push</span> <span class="flag">-u</span> origin feature/file1-updates
+
+<span class="comment"># Step 6: Create PR on GitHub, get it reviewed, merge</span>
+<span class="comment"># ✅ Done! A's work is now in main</span></pre>
+                </div>
+            </div>
+
+            <div class="code-block animate-on-scroll">
+                <div class="code-header">
+                    <span class="code-title">Person B's workflow (AFTER A has already merged)</span>
+                    <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+                    <pre><span class="comment"># B has been working on their branch the whole time...</span>
+<span class="comment"># A just merged. Does B need to do anything? NO!</span>
+
+<span class="comment"># B just continues working:</span>
+<span class="command">git add</span> file2.html
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Update file2 with new features"</span>
+
+<span class="comment"># When B is ready to merge:</span>
+<span class="command">git push</span> origin feature/file2-updates
+
+<span class="comment"># Create PR on GitHub</span>
+<span class="comment"># GitHub will show: "feature/file2-updates → main"</span>
+<span class="comment"># GitHub automatically checks: "Can this merge cleanly?"</span>
+<span class="comment"># Since B edited file2 and A edited file1 → ✅ YES!</span>
+
+<span class="comment"># Get PR reviewed, merge</span>
+<span class="comment"># ✅ Done! Main now has BOTH file1 (A's) and file2 (B's)</span></pre>
+                </div>
+            </div>
+
+            <div class="code-block animate-on-scroll">
+                <div class="code-header">
+                    <span class="code-title">OPTIONAL: If B wants to sync with main while working</span>
+                    <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+                    <pre><span class="comment"># B is on their feature branch and wants A's latest changes</span>
+<span class="comment"># (This is OPTIONAL - only needed for long-running branches)</span>
+
+<span class="comment"># Make sure all your work is committed first!</span>
+<span class="command">git add</span> .
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"WIP: my current progress"</span>
+
+<span class="comment"># Now pull main into your branch</span>
+<span class="command">git pull</span> origin main
+
+<span class="comment"># What happens:</span>
+<span class="comment"># - Git fetches the latest main (which has A's file1.html)</span>
+<span class="comment"># - Git merges it INTO your branch</span>
+<span class="comment"># - Your file2.html work is PRESERVED</span>
+<span class="comment"># - Now your branch has: your file2 changes + A's file1 changes</span>
+
+<span class="comment"># ✅ Your work is safe! You now have the latest from main.</span></pre>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-red);" class="animate-on-scroll">⚠️ What NOT To Do</h3>
+
+            <div class="warning-box animate-on-scroll">
+                <div class="warning-box-icon">🚫</div>
+                <div>
+                    <h4>Don't do this after someone else merges!</h4>
+                    <div class="code-block" style="margin-top: 1rem; background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3);">
+                        <div class="code-content">
+                            <pre><span style="color: var(--accent-red);"># ❌ WRONG: Abandoning your work</span>
+<span class="command">git checkout</span> main
+<span class="command">git pull</span>
+<span class="command">git checkout</span> <span class="flag">-b</span> feature/file2-updates-NEW  <span style="color: var(--accent-red);"># NO! Don't create new branch!</span>
+<span style="color: var(--accent-red);"># Your old branch still has all your work - don't abandon it!</span>
+
+<span style="color: var(--accent-red);"># ❌ WRONG: Random pulling without knowing what you're doing</span>
+<span class="command">git pull</span>  <span style="color: var(--accent-red);"># Without specifying origin/branch - confusing!</span>
+
+<span style="color: var(--accent-red);"># ❌ WRONG: Thinking you need to start over</span>
+<span class="command">git stash</span>          <span style="color: var(--accent-red);"># Don't stash just because someone else merged!</span>
+<span class="command">git checkout</span> main
+<span class="command">git pull</span>
+<span style="color: var(--accent-red);"># Your branch is FINE! Just keep working on it!</span></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">💎</div>
+                <div>
+                    <h4>The Golden Rule of Branch Safety</h4>
+                    <p>
+                        <strong>Your branch is YOUR space.</strong> No one else's merge, push, or pull affects your branch unless YOU explicitly ask for it (like <code>git pull origin main</code>). Work confidently knowing your changes are safe until YOU decide to merge them.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: Quick Reference - Do I Need to Pull? -->
+    <section class="slide" id="pull-decision">
+        <div class="slide-content">
+            <div class="section-number">Chapter 11</div>
+            <h2 class="section-title">🤔 Decision Tree: Do I Need to Pull/Sync?</h2>
+            <p class="section-subtitle">
+                A simple flowchart to know exactly what to do in any situation.
+            </p>
+
+            <div class="diagram-container animate-on-scroll" style="background: var(--bg-code); padding: 2rem; border-radius: 16px;">
+                <div style="text-align: center;">
+                    <div style="display: inline-block; padding: 1rem 2rem; background: var(--accent-cyan); color: var(--bg-dark); border-radius: 8px; font-weight: 600; margin-bottom: 1rem;">
+                        Someone else just merged to main. What do I do?
+                    </div>
+                    
+                    <div style="margin: 1.5rem 0;">
+                        <span style="color: var(--text-muted);">▼</span>
+                    </div>
+                    
+                    <div style="display: inline-block; padding: 1rem 2rem; background: var(--accent-purple); color: white; border-radius: 8px; margin-bottom: 1rem;">
+                        Are you working on DIFFERENT files than they changed?
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 4rem; margin-top: 1.5rem;">
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent-green); font-weight: 600; margin-bottom: 0.5rem;">YES ✓</div>
+                            <span style="color: var(--text-muted);">▼</span>
+                            <div style="margin-top: 0.5rem; padding: 1.5rem; background: rgba(34,197,94,0.2); border: 2px solid var(--accent-green); border-radius: 12px; max-width: 250px;">
+                                <strong style="color: var(--accent-green);">Do nothing!</strong>
+                                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Keep working. Your branch is isolated. When you create your PR, Git will merge everything automatically.</p>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: var(--accent-orange); font-weight: 600; margin-bottom: 0.5rem;">NO / MAYBE</div>
+                            <span style="color: var(--text-muted);">▼</span>
+                            <div style="margin-top: 0.5rem; padding: 1.5rem; background: rgba(245,158,11,0.2); border: 2px solid var(--accent-orange); border-radius: 12px; max-width: 250px;">
+                                <strong style="color: var(--accent-orange);">Optionally sync</strong>
+                                <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;"><code>git pull origin main</code> while on your branch. This brings their changes in early so you can handle any conflicts now.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">📋 Quick Reference Table</h3>
+
+            <table class="comparison-table animate-on-scroll">
+                <thead>
+                    <tr>
+                        <th>Situation</th>
+                        <th>What To Do</th>
+                        <th>Why</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Starting new work</td>
+                        <td style="color: var(--accent-green);"><code>git pull</code> on main, then create branch</td>
+                        <td>Start with latest code</td>
+                    </tr>
+                    <tr>
+                        <td>Someone merged, I'm on my branch with different files</td>
+                        <td style="color: var(--accent-green);">Nothing! Keep working</td>
+                        <td>Your branch is isolated</td>
+                    </tr>
+                    <tr>
+                        <td>Someone merged, I might have overlapping files</td>
+                        <td style="color: var(--accent-orange);"><code>git pull origin main</code> (optional)</td>
+                        <td>Catch conflicts early</td>
+                    </tr>
+                    <tr>
+                        <td>I'm done and want to merge</td>
+                        <td style="color: var(--accent-cyan);">Push, create PR, merge on GitHub</td>
+                        <td>GitHub handles the merge</td>
+                    </tr>
+                    <tr>
+                        <td>Branch has been open for weeks</td>
+                        <td style="color: var(--accent-purple);"><code>git pull origin main</code> periodically</td>
+                        <td>Stay reasonably up-to-date</td>
+                    </tr>
+                    <tr>
+                        <td>I accidentally messed up my branch</td>
+                        <td style="color: var(--accent-orange);"><code>git reflog</code> to find previous state</td>
+                        <td>Git keeps history of everything</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="analogy-box animate-on-scroll" style="margin-top: 2rem; border-color: rgba(34,197,94,0.3); background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(34,197,94,0.02) 100%);">
+                <div class="analogy-title" style="color: var(--accent-green);">🎓 Summary: The Mental Model</div>
+                <p style="font-size: 1.05rem;">
+                    <strong>Your branch = Your private workspace.</strong><br><br>
+                    Other people can merge to main all day long — it doesn't touch your branch.<br>
+                    Your work is safe. Your commits are safe. Your files are safe.<br><br>
+                    When YOU'RE ready, YOU merge YOUR branch. Git combines everyone's work.<br>
+                    Different files? Automatic merge. Same files, different lines? Automatic merge.<br>
+                    Same exact lines? Git asks you to decide (rare!).<br><br>
+                    <strong style="color: var(--accent-green);">That's it. That's the whole system. You're now a Git pro! 🎉</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- SLIDE 11: Forking -->
     <section class="slide" id="forking">
         <div class="slide-content">
-            <div class="section-number">Chapter 07</div>
+            <div class="section-number">Chapter 12</div>
             <h2 class="section-title">🍴 Forking: Your Own Copy of Someone Else's Project</h2>
             <p class="section-subtitle">
                 Essential for contributing to open source and working on projects you don't own.
@@ -2987,7 +4007,7 @@
             </div>
     <section class="slide" id="pull-requests">
         <div class="slide-content">
-            <div class="section-number">Chapter 08</div>
+            <div class="section-number">Chapter 13</div>
             <h2 class="section-title">Pull Requests: The Heart of Collaboration</h2>
             <p class="section-subtitle">
                 Pull Requests (PRs) are how you propose changes and get them reviewed before merging.
@@ -3110,7 +4130,7 @@ Closes #42</pre>
     <!-- SLIDE 12: Merging & Conflicts -->
     <section class="slide" id="conflicts">
         <div class="slide-content">
-            <div class="section-number">Chapter 09</div>
+            <div class="section-number">Chapter 14</div>
             <h2 class="section-title">Merging & Conflict Resolution</h2>
             <p class="section-subtitle">
                 What happens when two people change the same thing? Let's demystify merge conflicts!
@@ -3244,7 +4264,7 @@ Closes #42</pre>
     <!-- SLIDE 13: Git Rebase -->
     <section class="slide" id="rebase">
         <div class="slide-content">
-            <div class="section-number">Chapter 09 (continued)</div>
+            <div class="section-number">Chapter 14 (continued)</div>
             <h2 class="section-title">Git Rebase: Rewriting History</h2>
             <p class="section-subtitle">
                 An alternative to merging that keeps your history clean and linear.
@@ -3425,7 +4445,7 @@ Closes #42</pre>
     <!-- SLIDE 14: What Can Go Wrong -->
     <section class="slide" id="dangers">
         <div class="slide-content">
-            <div class="section-number">Chapter 10</div>
+            <div class="section-number">Chapter 15</div>
             <h2 class="section-title">What Can Go Wrong? 😱</h2>
             <p class="section-subtitle">
                 Common mistakes, dangerous commands, and how to recover from disasters.
@@ -3544,7 +4564,7 @@ Closes #42</pre>
     <!-- SLIDE 15: GitHub Pages -->
     <section class="slide" id="github-pages">
         <div class="slide-content">
-            <div class="section-number">Chapter 11</div>
+            <div class="section-number">Chapter 16</div>
             <h2 class="section-title">🌐 GitHub Pages: Free Website Hosting!</h2>
             <p class="section-subtitle">
                 Deploy your website for free directly from your GitHub repository. Perfect for portfolios, documentation, and project sites.
@@ -3705,7 +4725,7 @@ Points to: yourusername.github.io
     <!-- SLIDE 16: Free vs Pro Account -->
     <section class="slide" id="pricing">
         <div class="slide-content">
-            <div class="section-number">Chapter 12</div>
+            <div class="section-number">Chapter 17</div>
             <h2 class="section-title">💰 GitHub Free vs Pro: What Do You Get?</h2>
             <p class="section-subtitle">
                 Understanding what's included in each plan so you can make the right choice.
@@ -3827,7 +4847,7 @@ Points to: yourusername.github.io
     <!-- SLIDE 17: GitHub Essentials - Issues, Projects, Actions -->
     <section class="slide" id="github-features">
         <div class="slide-content">
-            <div class="section-number">Chapter 13</div>
+            <div class="section-number">Chapter 18</div>
             <h2 class="section-title">🛠️ Essential GitHub Features</h2>
             <p class="section-subtitle">
                 Beyond code: Issues, Projects, Actions, and more tools that make GitHub powerful.
@@ -3987,7 +5007,7 @@ This project is licensed under the MIT License.
     <!-- SLIDE 18: Open Source vs Closed Source -->
     <section class="slide" id="open-source">
         <div class="slide-content">
-            <div class="section-number">Chapter 14</div>
+            <div class="section-number">Chapter 19</div>
             <h2 class="section-title">🌍 Open Source vs Closed Source</h2>
             <p class="section-subtitle">
                 Understanding the philosophy behind sharing code and why companies like n8n choose to open source.
@@ -4150,211 +5170,10 @@ This project is licensed under the MIT License.
         </div>
     </section>
 
-    <!-- SLIDE 19: Production Deployment Best Practices -->
-    <section class="slide" id="production">
-        <div class="slide-content">
-            <div class="section-number">Chapter 15</div>
-            <h2 class="section-title">🚀 Deploying to Production Without Breaking Things</h2>
-            <p class="section-subtitle">
-                Your app is live with real users. How do you add features without causing chaos?
-            </p>
-
-            <div class="analogy-box animate-on-scroll">
-                <div class="analogy-title">✈️ Analogy: Changing Engines Mid-Flight</div>
-                <p>
-                    Imagine you're flying a plane full of passengers (your users), and you need to upgrade the engines (add features). You can't just shut down and rebuild — the plane needs to keep flying! Production deployment is about <strong>making changes to a live system while keeping it running smoothly</strong> for everyone on board.
-                </p>
-            </div>
-
-            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🌍 Environment Strategy</h3>
-
-            <div class="diagram-container animate-on-scroll">
-                <div class="diagram-flow" style="flex-wrap: nowrap; overflow-x: auto;">
-                    <div class="diagram-node" style="min-width: 140px;">
-                        <h4>💻 Local</h4>
-                        <p>Your computer</p>
-                    </div>
-                    <div class="diagram-arrow">→</div>
-                    <div class="diagram-node purple" style="min-width: 140px;">
-                        <h4>🧪 Development</h4>
-                        <p>Shared dev server</p>
-                    </div>
-                    <div class="diagram-arrow">→</div>
-                    <div class="diagram-node orange" style="min-width: 140px;">
-                        <h4>🎭 Staging</h4>
-                        <p>Production clone</p>
-                    </div>
-                    <div class="diagram-arrow">→</div>
-                    <div class="diagram-node green" style="min-width: 140px;">
-                        <h4>🌐 Production</h4>
-                        <p>Real users!</p>
-                    </div>
-                </div>
-                <p style="color: var(--text-muted); margin-top: 1rem;">Never push directly to production! Always test in staging first.</p>
-            </div>
-
-            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🎯 Best Practices for Safe Production Deployments</h3>
-
-            <div class="card-grid animate-on-scroll">
-                <div class="card">
-                    <div class="card-icon cyan">🚩</div>
-                    <h3>1. Feature Flags</h3>
-                    <p>Deploy code but keep it hidden behind a "flag". Enable it gradually or for specific users only.</p>
-                    <div class="code-block" style="margin-top: 0.5rem;">
-                        <div class="code-content">
-                            <pre><span class="comment">// Feature flag example</span>
-<span class="keyword">if</span> (featureFlags.newCheckout) {
-  showNewCheckout();
-} <span class="keyword">else</span> {
-  showOldCheckout();
-}
-
-<span class="comment">// Enable for 10% of users first</span>
-<span class="comment">// Then 50%, then 100%</span></pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon purple">🔵🟢</div>
-                    <h3>2. Blue-Green Deployment</h3>
-                    <p>Run two identical environments. "Blue" serves users while you deploy to "Green". Then switch traffic instantly.</p>
-                    <div class="code-block" style="margin-top: 0.5rem;">
-                        <div class="code-content">
-                            <pre><span class="string">Blue (v1.0)</span> ← Users here
-<span class="keyword">Green (v1.1)</span> ← Deploy & test
-
-<span class="comment"># When ready, flip the switch:</span>
-<span class="keyword">Blue (v1.0)</span> 
-<span class="string">Green (v1.1)</span> ← Users here now!
-
-<span class="comment"># Problem? Flip back instantly!</span></pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon orange">🦅</div>
-                    <h3>3. Canary Releases</h3>
-                    <p>Release to a small percentage of users first (the "canaries"). If something breaks, only a few users are affected.</p>
-                    <div class="code-block" style="margin-top: 0.5rem;">
-                        <div class="code-content">
-                            <pre><span class="comment"># Gradual rollout:</span>
-Day 1: 1% of users get v2.0
-Day 2: 10% of users get v2.0
-Day 3: 50% of users get v2.0
-Day 4: 100% of users get v2.0
-
-<span class="comment"># Monitor errors at each stage!</span></pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon green">🔄</div>
-                    <h3>4. Rolling Deployments</h3>
-                    <p>Update servers one at a time instead of all at once. Some users get the new version while others still see the old one temporarily.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon red">⏪</div>
-                    <h3>5. Instant Rollback Plan</h3>
-                    <p>Always have a way to quickly revert to the previous version. If something breaks, roll back in seconds, not hours.</p>
-                    <div class="code-block" style="margin-top: 0.5rem;">
-                        <div class="code-content">
-                            <pre><span class="comment"># Git tags for each release</span>
-<span class="command">git tag</span> v1.2.3
-
-<span class="comment"># Rollback to previous version</span>
-<span class="command">git checkout</span> v1.2.2
-<span class="command">./deploy.sh</span></pre>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-icon pink">🧪</div>
-                    <h3>6. Staging Environment</h3>
-                    <p>A production-like environment where you test everything before going live. Same data structure, same configs, same scale.</p>
-                </div>
-            </div>
-
-            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">📋 The Safe Deployment Checklist</h3>
-
-            <div class="code-block animate-on-scroll">
-                <div class="code-header">
-                    <span class="code-title">Before every production deployment</span>
-                    <button class="code-copy" onclick="copyCode(this)">Copy</button>
-                </div>
-                <div class="code-content">
-                    <pre><span class="keyword">## Pre-Deployment</span>
-☐ All tests passing (unit, integration, e2e)
-☐ Code reviewed and approved
-☐ Tested in staging environment
-☐ Database migrations tested
-☐ Feature flags configured
-☐ Rollback plan ready
-☐ Team notified of deployment window
-
-<span class="keyword">## During Deployment</span>
-☐ Monitor error rates in real-time
-☐ Check key metrics (response time, CPU, memory)
-☐ Verify critical user flows work
-☐ Watch logs for anomalies
-
-<span class="keyword">## Post-Deployment</span>
-☐ Smoke test critical features
-☐ Monitor for 15-30 minutes
-☐ Check user feedback channels
-☐ Document any issues encountered
-☐ Celebrate if all went well! 🎉</pre>
-                </div>
-            </div>
-
-            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🔀 Git Branching Strategy for Production</h3>
-
-            <div class="branch-visual animate-on-scroll" style="padding: 2rem;">
-                <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
-<span style="color: var(--accent-green);">main (production)</span>  ────●────────●────────●────────●──── <span style="color: var(--accent-green);">Always deployable!</span>
-                          │        ↑        ↑        ↑
-                          │        │        │        │
-<span style="color: var(--accent-cyan);">develop</span>             ──────●────●───●────●───●────●───●──── <span style="color: var(--accent-cyan);">Integration branch</span>
-                               ↑        ↑        ↑
-                               │        │        │
-<span style="color: var(--accent-purple);">feature/login</span>           ───●───●        │        │
-<span style="color: var(--accent-orange);">feature/checkout</span>              ───●───●        │
-<span style="color: var(--accent-pink);">hotfix/urgent-bug</span>       ─────────────────────●───────── <span style="color: var(--accent-red);">Direct to main!</span>
-                </pre>
-            </div>
-
-            <div class="card-grid animate-on-scroll">
-                <div class="card" style="border-color: rgba(34,197,94,0.3);">
-                    <h3 style="color: var(--accent-green);">main / master</h3>
-                    <p>Always production-ready. Only merged code that's been tested. Every commit here can be deployed.</p>
-                </div>
-                <div class="card" style="border-color: rgba(0,212,255,0.3);">
-                    <h3 style="color: var(--accent-cyan);">develop</h3>
-                    <p>Integration branch. Features merge here first. When stable, merge to main for release.</p>
-                </div>
-                <div class="card" style="border-color: rgba(168,85,247,0.3);">
-                    <h3 style="color: var(--accent-purple);">feature/*</h3>
-                    <p>Individual features. Branch from develop, merge back to develop when complete.</p>
-                </div>
-                <div class="card" style="border-color: rgba(239,68,68,0.3);">
-                    <h3 style="color: var(--accent-red);">hotfix/*</h3>
-                    <p>Emergency fixes! Branch from main, fix the bug, merge to BOTH main AND develop.</p>
-                </div>
-            </div>
-
-            <div class="pro-tip animate-on-scroll">
-                <div class="pro-tip-icon">🎯</div>
-                <div>
-                    <h4>The Golden Rule of Production</h4>
-                    <p><strong>Never deploy on Fridays!</strong> If something breaks, you'll be debugging all weekend. Deploy early in the week when the team is available to respond quickly. And always have a rollback plan ready!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- SLIDE 20: Advanced GitHub Features -->
     <section class="slide" id="advanced-features">
         <div class="slide-content">
-            <div class="section-number">Chapter 16</div>
+            <div class="section-number">Chapter 20</div>
             <h2 class="section-title">🔧 Advanced GitHub Features</h2>
             <p class="section-subtitle">
                 Power user features that make collaboration smoother and more professional.
@@ -4679,7 +5498,7 @@ Dockerfile        @devops-team
     <!-- SLIDE 21: Best Practices -->
     <section class="slide" id="best-practices">
         <div class="slide-content">
-            <div class="section-number">Chapter 17</div>
+            <div class="section-number">Chapter 21</div>
             <h2 class="section-title">Best Practices</h2>
             <p class="section-subtitle">
                 Follow these guidelines and you'll be a joy to collaborate with!
@@ -4810,7 +5629,7 @@ credentials.json</pre>
     <!-- SLIDE 15: Secret Sauce -->
     <section class="slide" id="secret-sauce">
         <div class="slide-content">
-            <div class="section-number">Chapter 18</div>
+            <div class="section-number">Chapter 22</div>
             <h2 class="section-title">🔥 Secret Sauce: Pro Tips</h2>
             <p class="section-subtitle">
                 Level up your Git game with these power user tips and tricks!
@@ -4937,15 +5756,31 @@ credentials.json</pre>
     <!-- SLIDE 16: Hands-On Exercise -->
     <section class="slide" id="exercise">
         <div class="slide-content">
-            <div class="section-number">Chapter 19</div>
+            <div class="section-number">Chapter 23</div>
             <h2 class="section-title">🎯 Hands-On Exercise: Team Collaboration</h2>
             <p class="section-subtitle">
                 Time to put everything into practice! Let's simulate a real team workflow.
             </p>
 
+            <div class="warning-box animate-on-scroll">
+                <div class="warning-box-icon">⚠️</div>
+                <div>
+                    <h4>Prerequisites: Before You Start!</h4>
+                    <p>Make sure you have completed these steps (see <strong>Chapter 03: Setting Up Your Environment</strong>):</p>
+                    <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                        <li>✅ <strong>Git installed</strong> on your computer (<code>git --version</code> should show a version number)</li>
+                        <li>✅ <strong>GitHub account</strong> created at <a href="https://github.com" target="_blank" style="color: var(--accent-cyan);">github.com</a></li>
+                        <li>✅ <strong>Git configured</strong> with your name and email:<br>
+                            <code style="font-size: 0.85rem;">git config --global user.name "Your Name"</code><br>
+                            <code style="font-size: 0.85rem;">git config --global user.email "you@example.com"</code>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="exercise-box animate-on-scroll">
                 <h3>🎬 Scenario</h3>
-                <p>You're part of a 4-person team building a simple website. One person will create the repository and add the others as collaborators. Each person will work on a different section simultaneously, then you'll all merge your work together — and intentionally create a merge conflict to practice resolving it!</p>
+                <p>You're part of a 4-person team building a simple website. One person will create the repository and add the others as collaborators. Each person will work on a <strong>different file</strong> simultaneously (so no conflicts!), then you'll all merge your work together. Finally, you'll intentionally create a merge conflict to practice resolving it!</p>
             </div>
 
             <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">Phase 1: Setup (Team Lead)</h3>
@@ -5012,48 +5847,70 @@ credentials.json</pre>
                 </div>
             </div>
 
-            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">Phase 3: Work Independently</h3>
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">Phase 3: Work Independently (Different Files = No Conflicts!)</h3>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">💡</div>
+                <div>
+                    <h4>This is the Key Learning Moment!</h4>
+                    <p>Notice that each person creates their OWN file. This means <strong>NO conflicts are possible</strong> — Git will simply combine all the new files when you merge!</p>
+                </div>
+            </div>
 
             <div class="card-grid animate-on-scroll">
                 <div class="card">
-                    <h3>Person A: Header</h3>
-                    <p>Add a navigation header to index.html</p>
+                    <h3>Person A: Create header.html</h3>
+                    <p>Create a NEW file called <code>header.html</code></p>
                     <div class="code-block" style="margin-top: 0.5rem;">
                         <div class="code-content">
-                            <pre><span class="comment">&lt;!-- Add this at the top of index.html --&gt;</span>
+                            <pre><span class="comment">&lt;!-- Create file: header.html --&gt;</span>
 <span class="keyword">&lt;nav&gt;</span>
-  <span class="keyword">&lt;a href="#"&gt;</span>Home<span class="keyword">&lt;/a&gt;</span>
-  <span class="keyword">&lt;a href="#"&gt;</span>About<span class="keyword">&lt;/a&gt;</span>
-  <span class="keyword">&lt;a href="#"&gt;</span>Contact<span class="keyword">&lt;/a&gt;</span>
+  <span class="keyword">&lt;a href="index.html"&gt;</span>Home<span class="keyword">&lt;/a&gt;</span>
+  <span class="keyword">&lt;a href="about.html"&gt;</span>About<span class="keyword">&lt;/a&gt;</span>
+  <span class="keyword">&lt;a href="contact.html"&gt;</span>Contact<span class="keyword">&lt;/a&gt;</span>
 <span class="keyword">&lt;/nav&gt;</span></pre>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <h3>Person B: About Section</h3>
-                    <p>Add an about section to index.html</p>
+                    <h3>Person B: Create about.html</h3>
+                    <p>Create a NEW file called <code>about.html</code></p>
                     <div class="code-block" style="margin-top: 0.5rem;">
                         <div class="code-content">
-                            <pre><span class="comment">&lt;!-- Add this after the h1 --&gt;</span>
-<span class="keyword">&lt;section id="about"&gt;</span>
-  <span class="keyword">&lt;h2&gt;</span>About Us<span class="keyword">&lt;/h2&gt;</span>
+                            <pre><span class="comment">&lt;!-- Create file: about.html --&gt;</span>
+<span class="keyword">&lt;!DOCTYPE html&gt;</span>
+<span class="keyword">&lt;html&gt;</span>
+<span class="keyword">&lt;body&gt;</span>
+  <span class="keyword">&lt;h1&gt;</span>About Us<span class="keyword">&lt;/h1&gt;</span>
   <span class="keyword">&lt;p&gt;</span>We are a great team!<span class="keyword">&lt;/p&gt;</span>
-<span class="keyword">&lt;/section&gt;</span></pre>
+<span class="keyword">&lt;/body&gt;</span>
+<span class="keyword">&lt;/html&gt;</span></pre>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <h3>Person C: Footer</h3>
-                    <p>Add a footer to index.html</p>
+                    <h3>Person C: Create footer.html</h3>
+                    <p>Create a NEW file called <code>footer.html</code></p>
                     <div class="code-block" style="margin-top: 0.5rem;">
                         <div class="code-content">
-                            <pre><span class="comment">&lt;!-- Add this at the bottom --&gt;</span>
+                            <pre><span class="comment">&lt;!-- Create file: footer.html --&gt;</span>
 <span class="keyword">&lt;footer&gt;</span>
   <span class="keyword">&lt;p&gt;</span>© 2026 Team Website<span class="keyword">&lt;/p&gt;</span>
+  <span class="keyword">&lt;p&gt;</span>Built with ❤️ by our team<span class="keyword">&lt;/p&gt;</span>
 <span class="keyword">&lt;/footer&gt;</span></pre>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="analogy-box animate-on-scroll">
+                <div class="analogy-title">✅ What Will Happen When Everyone Merges?</div>
+                <p>
+                    Person A merges → main now has: index.html, README.md, <strong>header.html</strong><br>
+                    Person B merges → main now has: index.html, README.md, header.html, <strong>about.html</strong><br>
+                    Person C merges → main now has: index.html, README.md, header.html, about.html, <strong>footer.html</strong><br><br>
+                    <strong style="color: var(--accent-green);">Zero conflicts! Git simply adds each new file.</strong> This is the normal, everyday reality of team collaboration.
+                </p>
             </div>
 
             <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">Phase 4: Commit, Push, and Create PRs</h3>
@@ -5066,20 +5923,36 @@ credentials.json</pre>
                 <div class="code-content">
                     <pre><span class="comment"># Add and commit your changes</span>
 <span class="command">git add</span> .
-<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Add [your section] to website"</span>
+<span class="command">git commit</span> <span class="flag">-m</span> <span class="string">"Add [header/about/footer].html"</span>
 
 <span class="comment"># Push your branch</span>
 <span class="command">git push</span> <span class="flag">-u</span> origin feature/[your-branch-name]
 
-<span class="comment"># Now go to GitHub and create a Pull Request!</span></pre>
+<span class="comment"># Now go to GitHub and create a Pull Request!</span>
+<span class="comment"># Since you each created DIFFERENT files, all PRs will merge cleanly! ✅</span></pre>
                 </div>
             </div>
 
             <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">Phase 5: Creating a Merge Conflict (Intentionally!)</h3>
 
+            <div class="warning-box animate-on-scroll">
+                <div class="warning-box-icon">⚠️</div>
+                <div>
+                    <h4>Why This WILL Create a Conflict</h4>
+                    <p>
+                        In Phase 3, everyone worked on <strong>different files</strong> → No conflict.<br>
+                        Now, we'll have two people edit the <strong>SAME line</strong> in the <strong>SAME file</strong> → Conflict!<br>
+                        This is the ONLY situation where Git needs your help.
+                    </p>
+                </div>
+            </div>
+
             <div class="exercise-box animate-on-scroll">
                 <h3>⚔️ The Conflict Challenge</h3>
-                <p>Have TWO people both modify the <code>&lt;h1&gt;</code> tag with different text. Person A changes it to "Welcome to Our Amazing Website" and Person B changes it to "Welcome to Team Awesome". When the second person tries to merge, they'll get a conflict!</p>
+                <p>Have TWO people both modify the <code>&lt;h1&gt;</code> tag in <code>index.html</code> with different text:<br><br>
+                <strong>Person A</strong> changes it to: <code>&lt;h1&gt;Welcome to Our Amazing Website&lt;/h1&gt;</code><br>
+                <strong>Person B</strong> changes it to: <code>&lt;h1&gt;Welcome to Team Awesome&lt;/h1&gt;</code><br><br>
+                Both edit the <strong>exact same line</strong>. When the second person tries to merge, Git will say: "I don't know which h1 to keep — you decide!"</p>
             </div>
 
             <div class="steps-container animate-on-scroll">
@@ -5142,7 +6015,211 @@ credentials.json</pre>
                 <div class="pro-tip-icon">🎉</div>
                 <div>
                     <h4>Congratulations!</h4>
-                    <p>You've just completed a full team collaboration cycle: creating a repo, adding collaborators, working in parallel branches, creating PRs, handling merge conflicts, and merging everything together. This is exactly how professional teams work every day!</p>
+                    <p>You've just completed a full team collaboration cycle! Key learnings:<br>
+                    ✅ <strong>Different files = No conflicts</strong> (Phase 3 - everyone merged smoothly)<br>
+                    ⚠️ <strong>Same line, same file = Conflict</strong> (Phase 5 - required manual resolution)<br><br>
+                    This is exactly how professional teams work every day. Now you understand WHY conflicts are rare — and HOW to handle them when they do occur!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLIDE: Production Deployment Best Practices (moved to end) -->
+    <section class="slide" id="production">
+        <div class="slide-content">
+            <div class="section-number">Chapter 24</div>
+            <h2 class="section-title">🚀 Deploying to Production Without Breaking Things</h2>
+            <p class="section-subtitle">
+                Your app is live with real users. How do you add features without causing chaos?
+            </p>
+
+            <div class="analogy-box animate-on-scroll">
+                <div class="analogy-title">✈️ Analogy: Changing Engines Mid-Flight</div>
+                <p>
+                    Imagine you're flying a plane full of passengers (your users), and you need to upgrade the engines (add features). You can't just shut down and rebuild — the plane needs to keep flying! Production deployment is about <strong>making changes to a live system while keeping it running smoothly</strong> for everyone on board.
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🌍 Environment Strategy</h3>
+
+            <div class="diagram-container animate-on-scroll">
+                <div class="diagram-flow" style="flex-wrap: nowrap; overflow-x: auto;">
+                    <div class="diagram-node" style="min-width: 140px;">
+                        <h4>💻 Local</h4>
+                        <p>Your computer</p>
+                    </div>
+                    <div class="diagram-arrow">→</div>
+                    <div class="diagram-node purple" style="min-width: 140px;">
+                        <h4>🧪 Development</h4>
+                        <p>Shared dev server</p>
+                    </div>
+                    <div class="diagram-arrow">→</div>
+                    <div class="diagram-node orange" style="min-width: 140px;">
+                        <h4>🎭 Staging</h4>
+                        <p>Production clone</p>
+                    </div>
+                    <div class="diagram-arrow">→</div>
+                    <div class="diagram-node green" style="min-width: 140px;">
+                        <h4>🌐 Production</h4>
+                        <p>Real users!</p>
+                    </div>
+                </div>
+                <p style="color: var(--text-muted); margin-top: 1rem;">Never push directly to production! Always test in staging first.</p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🎯 Best Practices for Safe Production Deployments</h3>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card">
+                    <div class="card-icon cyan">🚩</div>
+                    <h3>1. Feature Flags</h3>
+                    <p>Deploy code but keep it hidden behind a "flag". Enable it gradually or for specific users only.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment">// Feature flag example</span>
+<span class="keyword">if</span> (featureFlags.newCheckout) {
+  showNewCheckout();
+} <span class="keyword">else</span> {
+  showOldCheckout();
+}
+
+<span class="comment">// Enable for 10% of users first</span>
+<span class="comment">// Then 50%, then 100%</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon purple">🔵🟢</div>
+                    <h3>2. Blue-Green Deployment</h3>
+                    <p>Run two identical environments. "Blue" serves users while you deploy to "Green". Then switch traffic instantly.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="string">Blue (v1.0)</span> ← Users here
+<span class="keyword">Green (v1.1)</span> ← Deploy & test
+
+<span class="comment"># When ready, flip the switch:</span>
+<span class="keyword">Blue (v1.0)</span> 
+<span class="string">Green (v1.1)</span> ← Users here now!
+
+<span class="comment"># Problem? Flip back instantly!</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon orange">🦅</div>
+                    <h3>3. Canary Releases</h3>
+                    <p>Release to a small percentage of users first (the "canaries"). If something breaks, only a few users are affected.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Gradual rollout:</span>
+Day 1: 1% of users get v2.0
+Day 2: 10% of users get v2.0
+Day 3: 50% of users get v2.0
+Day 4: 100% of users get v2.0
+
+<span class="comment"># Monitor errors at each stage!</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon green">🔄</div>
+                    <h3>4. Rolling Deployments</h3>
+                    <p>Update servers one at a time instead of all at once. Some users get the new version while others still see the old one temporarily.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon red">⏪</div>
+                    <h3>5. Instant Rollback Plan</h3>
+                    <p>Always have a way to quickly revert to the previous version. If something breaks, roll back in seconds, not hours.</p>
+                    <div class="code-block" style="margin-top: 0.5rem;">
+                        <div class="code-content">
+                            <pre><span class="comment"># Git tags for each release</span>
+<span class="command">git tag</span> v1.2.3
+
+<span class="comment"># Rollback to previous version</span>
+<span class="command">git checkout</span> v1.2.2
+<span class="command">./deploy.sh</span></pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon pink">🧪</div>
+                    <h3>6. Staging Environment</h3>
+                    <p>A production-like environment where you test everything before going live. Same data structure, same configs, same scale.</p>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">📋 The Safe Deployment Checklist</h3>
+
+            <div class="code-block animate-on-scroll">
+                <div class="code-header">
+                    <span class="code-title">Before every production deployment</span>
+                    <button class="code-copy" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-content">
+                    <pre><span class="keyword">## Pre-Deployment</span>
+☐ All tests passing (unit, integration, e2e)
+☐ Code reviewed and approved
+☐ Tested in staging environment
+☐ Database migrations tested
+☐ Feature flags configured
+☐ Rollback plan ready
+☐ Team notified of deployment window
+
+<span class="keyword">## During Deployment</span>
+☐ Monitor error rates in real-time
+☐ Check key metrics (response time, CPU, memory)
+☐ Verify critical user flows work
+☐ Watch logs for anomalies
+
+<span class="keyword">## Post-Deployment</span>
+☐ Smoke test critical features
+☐ Monitor for 15-30 minutes
+☐ Check user feedback channels
+☐ Document any issues encountered
+☐ Celebrate if all went well! 🎉</pre>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🔀 Git Branching Strategy for Production</h3>
+
+            <div class="branch-visual animate-on-scroll" style="padding: 2rem;">
+                <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 2;">
+<span style="color: var(--accent-green);">main (production)</span>  ────●────────●────────●────────●──── <span style="color: var(--accent-green);">Always deployable!</span>
+                          │        ↑        ↑        ↑
+                          │        │        │        │
+<span style="color: var(--accent-cyan);">develop</span>             ──────●────●───●────●───●────●───●──── <span style="color: var(--accent-cyan);">Integration branch</span>
+                               ↑        ↑        ↑
+                               │        │        │
+<span style="color: var(--accent-purple);">feature/login</span>           ───●───●        │        │
+<span style="color: var(--accent-orange);">feature/checkout</span>              ───●───●        │
+<span style="color: var(--accent-pink);">hotfix/urgent-bug</span>       ─────────────────────●───────── <span style="color: var(--accent-red);">Direct to main!</span>
+                </pre>
+            </div>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(34,197,94,0.3);">
+                    <h3 style="color: var(--accent-green);">main / master</h3>
+                    <p>Always production-ready. Only merged code that's been tested. Every commit here can be deployed.</p>
+                </div>
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <h3 style="color: var(--accent-cyan);">develop</h3>
+                    <p>Integration branch. Features merge here first. When stable, merge to main for release.</p>
+                </div>
+                <div class="card" style="border-color: rgba(168,85,247,0.3);">
+                    <h3 style="color: var(--accent-purple);">feature/*</h3>
+                    <p>Individual features. Branch from develop, merge back to develop when complete.</p>
+                </div>
+                <div class="card" style="border-color: rgba(239,68,68,0.3);">
+                    <h3 style="color: var(--accent-red);">hotfix/*</h3>
+                    <p>Emergency fixes! Branch from main, fix the bug, merge to BOTH main AND develop.</p>
+                </div>
+            </div>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">🎯</div>
+                <div>
+                    <h4>The Golden Rule of Production</h4>
+                    <p><strong>Never deploy on Fridays!</strong> If something breaks, you'll be debugging all weekend. Deploy early in the week when the team is available to respond quickly. And always have a rollback plan ready!</p>
                 </div>
             </div>
         </div>
@@ -5372,7 +6449,7 @@ credentials.json</pre>
         }
 
         // Smooth scroll for navigation
-        document.querySelectorAll('.nav-link').forEach(function(link) {
+        document.querySelectorAll('.nav-link, .nav-dropdown-content a').forEach(function(link) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
