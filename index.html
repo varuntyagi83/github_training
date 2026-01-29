@@ -1297,6 +1297,7 @@
                         <a href="#github-pages">Pages</a>
                         <a href="#open-source">Open Source</a>
                         <a href="#secret-sauce">Pro Tips</a>
+                        <a href="#exhaustive-qa">Troubleshooting</a>
                         <a href="#qa">Q&A</a>
                     </div>
                 </div>
@@ -1467,14 +1468,18 @@
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">11</div>
-                    <div class="agenda-text">Hands-On Team Exercise<span>~45 min</span></div>
+                    <div class="agenda-text">Common Questions & Troubleshooting<span>~20 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">12</div>
-                    <div class="agenda-text">Production Deployment Strategies<span>~15 min</span></div>
+                    <div class="agenda-text">Hands-On Team Exercise<span>~45 min</span></div>
                 </div>
                 <div class="agenda-item">
                     <div class="agenda-number">13</div>
+                    <div class="agenda-text">Production Deployment Strategies<span>~15 min</span></div>
+                </div>
+                <div class="agenda-item">
+                    <div class="agenda-number">14</div>
                     <div class="agenda-text">Summary & Q&A<span>~15 min</span></div>
                 </div>
             </div>
@@ -3395,18 +3400,63 @@ GitLens — Git supercharged</pre>
             <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">❓ FAQ: Answering Every Question</h3>
 
             <div class="card-grid animate-on-scroll">
-                <div class="card">
+                <div class="card" style="grid-column: 1 / -1;">
                     <div class="card-icon purple">📦</div>
-                    <h3>Q: Should Person A use <code>git add .</code> or <code>git add file1.html</code>?</h3>
-                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-green);">Either works!</strong> Here's the difference:</p>
-                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
-                        <p style="margin-bottom: 0.5rem;"><code style="color: var(--accent-cyan);">git add .</code></p>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Stages ALL changed files in the folder. Convenient but be careful you don't accidentally include unwanted files.</p>
-                        <p style="margin: 1rem 0 0.5rem;"><code style="color: var(--accent-purple);">git add file1.html</code></p>
-                        <p style="color: var(--text-muted); font-size: 0.85rem;">Stages only that specific file. More precise, good when you want to commit only certain changes.</p>
+                    <h3>Q: Should everyone use <code>git add .</code> or <code>git add file1.html</code> (specific files)?</h3>
+                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-purple);">Both work, but here's the full picture:</strong></p>
+                    
+                    <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(0,212,255,0.1); border-radius: 8px; border: 1px solid rgba(0,212,255,0.3);">
+                            <p style="color: var(--accent-cyan); font-weight: 600;"><code>git add .</code></p>
+                            <p style="color: var(--accent-green); font-size: 0.85rem; margin-top: 0.5rem;">✅ Fast and convenient</p>
+                            <p style="color: var(--accent-green); font-size: 0.85rem;">✅ Won't forget any files</p>
+                            <p style="color: var(--accent-red); font-size: 0.85rem; margin-top: 0.5rem;">⚠️ Risk: Might stage unwanted files</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">
+                                (temp files, .env secrets, logs, node_modules, .DS_Store, etc.)
+                            </p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(168,85,247,0.1); border-radius: 8px; border: 1px solid rgba(168,85,247,0.3);">
+                            <p style="color: var(--accent-purple); font-weight: 600;"><code>git add file1.html</code></p>
+                            <p style="color: var(--accent-green); font-size: 0.85rem; margin-top: 0.5rem;">✅ Precise and intentional</p>
+                            <p style="color: var(--accent-green); font-size: 0.85rem;">✅ Only commits what you specify</p>
+                            <p style="color: var(--accent-orange); font-size: 0.85rem; margin-top: 0.5rem;">⚠️ More typing required</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">
+                                (and easy to forget files in multi-file changes)
+                            </p>
+                        </div>
                     </div>
-                    <p style="margin-top: 1rem; color: var(--accent-green);">✅ This choice does NOT affect Person B or C at all!</p>
+
+                    <div style="margin-top: 1.5rem; padding: 1rem; background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.05) 100%); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                        <p style="color: var(--accent-green); font-weight: 600;">🎯 Best Practice: Use <code>.gitignore</code> + <code>git add .</code></p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">
+                            Create a <code>.gitignore</code> file in your repo that lists files/folders Git should NEVER track. Then <code>git add .</code> becomes completely safe!
+                        </p>
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 0.5rem;"># Example .gitignore file:</p>
+                            <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">node_modules/
+.env
+*.log
+.DS_Store
+dist/
+.vscode/
+*.tmp</pre>
+                        </div>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem;">
+                            💡 <strong>Pro tip:</strong> GitHub has ready-made .gitignore templates for every language at <a href="https://github.com/github/gitignore" target="_blank" style="color: var(--accent-cyan);">github.com/github/gitignore</a>
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <p style="color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 0.5rem;">🔍 Always check before committing:</p>
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--accent-cyan);">git status</span>          <span style="color: var(--text-muted);"># See what's staged</span>
+<span style="color: var(--accent-cyan);">git diff --staged</span>   <span style="color: var(--text-muted);"># See exact changes about to be committed</span></pre>
+                    </div>
+
+                    <p style="margin-top: 1rem; color: var(--accent-green);">✅ Either approach works for team collaboration — this choice does NOT affect other team members!</p>
                 </div>
+            </div>
+
+            <div class="card-grid animate-on-scroll" style="margin-top: 1.5rem;">
                 <div class="card">
                     <div class="card-icon cyan">🔀</div>
                     <h3>Q: After A merges, is main "new" and B/C on "old" version?</h3>
@@ -3420,9 +3470,6 @@ GitLens — Git supercharged</pre>
                         </p>
                     </div>
                 </div>
-            </div>
-
-            <div class="card-grid animate-on-scroll" style="margin-top: 1.5rem;">
                 <div class="card">
                     <div class="card-icon green">🌿</div>
                     <h3>Q: Do B and C need to create NEW branches after A merges?</h3>
@@ -3447,6 +3494,116 @@ GitLens — Git supercharged</pre>
                         <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">B can completely ignore that A merged. When B is ready, they create their PR.</p>
                         <p style="margin-bottom: 0.5rem;"><span style="color: var(--accent-green);">✅ Right option 2:</span> Sync with main (optional, for long projects)</p>
                         <p style="color: var(--text-muted); font-size: 0.85rem;"><code>git pull origin main</code> — This brings main's changes INTO your branch. Your work is preserved!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-grid animate-on-scroll" style="margin-top: 1.5rem;">
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="card-icon pink">🔥</div>
+                    <h3>Q: What if Person B is ALSO editing file1.html? Should they pull to get A's changes? Will there be a conflict?</h3>
+                    <p style="margin-top: 1rem;"><strong style="color: var(--accent-pink);">Great question! Here's the complete answer:</strong></p>
+                    
+                    <div style="margin-top: 1.5rem;">
+                        <p style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 0.5rem;">1️⃣ Do they NEED to pull A's changes?</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                            <strong>No, not immediately.</strong> B can keep working on their version of file1.html without pulling. Git will handle it at merge time.
+                        </p>
+                        
+                        <p style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 0.5rem;">2️⃣ Will there be a conflict?</p>
+                        <p style="color: var(--text-secondary); margin-bottom: 0.5rem;"><strong>It depends on WHERE in the file they edited:</strong></p>
+                    </div>
+
+                    <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                            <p style="color: var(--accent-green); font-weight: 600;">✅ NO Conflict</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">A edited lines 1-10<br>B edited lines 50-60</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">Git auto-merges both changes</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(245,158,11,0.1); border-radius: 8px; border: 1px solid rgba(245,158,11,0.3);">
+                            <p style="color: var(--accent-orange); font-weight: 600;">⚠️ MAYBE Conflict</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">A edited lines 10-15<br>B edited lines 18-22</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">Close together — Git might struggle</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                            <p style="color: var(--accent-red); font-weight: 600;">❌ DEFINITE Conflict</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">A edited line 5<br>B also edited line 5</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">Same line = must resolve manually</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <p style="font-weight: 600; color: var(--accent-cyan); margin-bottom: 0.5rem;">3️⃣ Best Practice: Should B pull A's changes into their branch?</p>
+                        <div style="margin-top: 0.5rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--accent-green); margin-bottom: 0.5rem;"><strong>Recommended: Yes, periodically sync with main!</strong></p>
+                            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">This catches conflicts early while they're small and easy to fix:</p>
+                            <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># While on your feature branch:</span>
+<span style="color: var(--accent-cyan);">git pull origin main</span>
+
+<span style="color: var(--text-muted);"># If there's a conflict, fix it now (small & fresh)</span>
+<span style="color: var(--text-muted);"># If no conflict, great — you're synced!</span></pre>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 1rem;">
+                            <strong>Why?</strong> If you wait until merge time to discover conflicts, you might have 2 weeks of changes to untangle. If you sync regularly, you fix small conflicts as they happen.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 1.5rem;">
+                        <p style="font-weight: 600; color: var(--accent-pink); margin-bottom: 0.5rem;">4️⃣ Wait — won't <code>git pull origin main</code> overwrite MY files with old versions from main?</p>
+                        <div style="margin-top: 0.5rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.05) 100%); border-radius: 12px; border: 2px solid rgba(34,197,94,0.4);">
+                            <p style="color: var(--accent-green); font-weight: 700; font-size: 1.1rem; margin-bottom: 1rem;">🎉 NO! Your work is 100% SAFE!</p>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                                <code>git pull</code> doesn't just <em>replace</em> files — it <strong>intelligently MERGES</strong> changes. Git asks three questions:
+                            </p>
+                            <ol style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                                <li style="margin-bottom: 0.3rem;">What was the <strong>starting point</strong> (common ancestor)?</li>
+                                <li style="margin-bottom: 0.3rem;">What changed <strong>in main</strong> since then?</li>
+                                <li>What changed <strong>in my branch</strong> since then?</li>
+                            </ol>
+                        </div>
+
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 1rem 0;">
+                            <strong>Example:</strong> Person A merged file1.html to main. Person B is working on file2.html. Person B does <code>git pull origin main</code>:
+                        </p>
+
+                        <div style="overflow-x: auto;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 0.5rem;">
+                                <thead>
+                                    <tr style="background: var(--bg-card);">
+                                        <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--accent-cyan);">File</th>
+                                        <th style="padding: 0.75rem; text-align: center; border-bottom: 2px solid var(--accent-cyan);">Main changed it?</th>
+                                        <th style="padding: 0.75rem; text-align: center; border-bottom: 2px solid var(--accent-cyan);">Person B changed it?</th>
+                                        <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--accent-cyan);">Result after pull</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.75rem;"><code>file1.html</code></td>
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--accent-green);">✅ Yes (A's work)</td>
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--text-muted);">❌ No</td>
+                                        <td style="padding: 0.75rem; color: var(--accent-cyan);">Gets A's updated version</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-color);">
+                                        <td style="padding: 0.75rem;"><code>file2.html</code></td>
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--text-muted);">❌ No</td>
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--accent-green);">✅ Yes (B's work)</td>
+                                        <td style="padding: 0.75rem; color: var(--accent-green); font-weight: 600;">✨ KEEPS B's version!</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 0.75rem;"><code>file3.html</code></td>
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--text-muted);">❌ No</td>
+                                        <td style="padding: 0.75rem; text-align: center; color: var(--text-muted);">❌ No</td>
+                                        <td style="padding: 0.75rem; color: var(--text-muted);">Stays the same</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--accent-green); font-size: 0.9rem;">
+                                <strong>🧠 Key insight:</strong> Git is smart! It knows "Main didn't touch file2.html, but Person B did — so I'll keep Person B's changes!" Your work is never lost when you pull.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -4005,6 +4162,9 @@ GitLens — Git supercharged</pre>
                     </p>
                 </div>
             </div>
+        </div>
+    </section>
+
     <section class="slide" id="pull-requests">
         <div class="slide-content">
             <div class="section-number">Chapter 13</div>
@@ -5753,10 +5913,328 @@ credentials.json</pre>
         </div>
     </section>
 
+    <!-- SLIDE: Exhaustive Q&A / Troubleshooting -->
+    <section class="slide" id="exhaustive-qa">
+        <div class="slide-content">
+            <div class="section-number">Chapter 23</div>
+            <h2 class="section-title">❓ Common Questions & Troubleshooting</h2>
+            <p class="section-subtitle">
+                Everything beginners ask (and are afraid to ask). If you've ever panicked, the answer is probably here!
+            </p>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-red);" class="animate-on-scroll">🚨 "Help! My Push Was Rejected!"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(239,68,68,0.4);">
+                <div class="card-icon red">❌</div>
+                <h3>Error: <code>! [rejected] main -> main (fetch first)</code></h3>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    <strong>What happened:</strong> Someone else pushed changes to the branch before you. Git refuses to overwrite their work.
+                </p>
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                    <p style="color: var(--accent-green); margin-bottom: 0.5rem;"><strong>Solution:</strong></p>
+                    <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># Step 1: Get their changes</span>
+<span style="color: var(--accent-cyan);">git pull origin main</span>
+
+<span style="color: var(--text-muted);"># Step 2: If there are conflicts, resolve them</span>
+<span style="color: var(--text-muted);"># Step 3: Push again</span>
+<span style="color: var(--accent-cyan);">git push origin main</span></pre>
+                </div>
+                <p style="margin-top: 1rem; color: var(--accent-green); font-size: 0.9rem;">
+                    💡 <strong>Prevention:</strong> Always <code>git pull</code> before starting work, and push frequently!
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-orange);" class="animate-on-scroll">😱 "I Committed Directly to Main by Mistake!"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(245,158,11,0.4);">
+                <div class="card-icon orange">🙈</div>
+                <h3>Oops, I forgot to create a branch first!</h3>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    <strong>Don't panic!</strong> Your commits aren't lost. You just need to move them to a new branch.
+                </p>
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                    <p style="color: var(--accent-green); margin-bottom: 0.5rem;"><strong>Solution (if you haven't pushed yet):</strong></p>
+                    <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># Step 1: Create a new branch (keeps your commits!)</span>
+<span style="color: var(--accent-cyan);">git checkout -b my-feature-branch</span>
+
+<span style="color: var(--text-muted);"># Step 2: Go back to main</span>
+<span style="color: var(--accent-cyan);">git checkout main</span>
+
+<span style="color: var(--text-muted);"># Step 3: Reset main to before your commits</span>
+<span style="color: var(--text-muted);"># (Use the number of commits you made, e.g., 2)</span>
+<span style="color: var(--accent-cyan);">git reset --hard HEAD~2</span>
+
+<span style="color: var(--text-muted);"># Step 4: Your commits are now only on the feature branch!</span>
+<span style="color: var(--accent-cyan);">git checkout my-feature-branch</span></pre>
+                </div>
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                    <p style="color: var(--accent-red); font-size: 0.9rem;">
+                        ⚠️ <strong>Warning:</strong> If you already pushed to main, talk to your team first! You may need to use <code>git revert</code> instead (see below).
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-purple);" class="animate-on-scroll">👥 "Can Two People Work on the SAME Branch?"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(168,85,247,0.4);">
+                <div class="card-icon purple">🤝</div>
+                <h3>Technically yes, but it's usually not recommended</h3>
+                
+                <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                        <p style="color: var(--accent-green); font-weight: 600;">✅ When it's OK:</p>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; margin-left: 1rem;">
+                            <li>Pair programming (sitting together)</li>
+                            <li>Very short-lived branches (hours)</li>
+                            <li>Clear communication about who's doing what</li>
+                        </ul>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                        <p style="color: var(--accent-red); font-weight: 600;">❌ When it's NOT OK:</p>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; margin-left: 1rem;">
+                            <li>Working asynchronously (different times)</li>
+                            <li>Long-running branches</li>
+                            <li>No communication</li>
+                        </ul>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; color: var(--accent-purple); font-size: 0.9rem;">
+                    💡 <strong>Best practice:</strong> Each person gets their own feature branch. Then create PRs to merge into a shared branch if needed.
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-cyan);" class="animate-on-scroll">🌐 "What is 'origin'? I See It Everywhere!"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(0,212,255,0.4);">
+                <div class="card-icon cyan">🏷️</div>
+                <h3><code>origin</code> is just a nickname for your GitHub repo URL</h3>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    Instead of typing the full URL every time, Git lets you use a short name. <code>origin</code> is the default name for the repo you cloned from.
+                </p>
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                    <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># These are the same thing:</span>
+<span style="color: var(--accent-cyan);">git push origin main</span>
+<span style="color: var(--accent-purple);">git push https://github.com/user/repo.git main</span>
+
+<span style="color: var(--text-muted);"># See what "origin" points to:</span>
+<span style="color: var(--accent-cyan);">git remote -v</span>
+
+<span style="color: var(--text-muted);"># Output:</span>
+<span style="color: var(--text-muted);"># origin  https://github.com/user/repo.git (fetch)</span>
+<span style="color: var(--text-muted);"># origin  https://github.com/user/repo.git (push)</span></pre>
+                </div>
+                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                    You can have multiple remotes with different names (e.g., <code>origin</code> for your fork, <code>upstream</code> for the original repo).
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-green);" class="animate-on-scroll">⏪ "How Do I Undo a Commit?"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(34,197,94,0.4);">
+                <div class="card-icon green">↩️</div>
+                <h3>Two ways: Safe (revert) vs. Rewrite History (reset)</h3>
+                
+                <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1.5rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 2px solid rgba(34,197,94,0.4);">
+                        <p style="color: var(--accent-green); font-weight: 700; font-size: 1.1rem;">✅ git revert (SAFE)</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Creates a NEW commit that undoes the changes. History is preserved.</p>
+                        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 6px;">
+                            <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);"><span style="color: var(--accent-green);">git revert HEAD</span>
+<span style="color: var(--text-muted);"># Undoes the last commit</span>
+<span style="color: var(--text-muted);"># Creates a new "undo" commit</span></pre>
+                        </div>
+                        <p style="color: var(--accent-green); font-size: 0.85rem; margin-top: 0.75rem;">
+                            <strong>Use when:</strong> Already pushed, or want clean history
+                        </p>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 2px solid rgba(239,68,68,0.4);">
+                        <p style="color: var(--accent-red); font-weight: 700; font-size: 1.1rem;">⚠️ git reset (DANGEROUS)</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">Rewrites history by removing commits. Use with caution!</p>
+                        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 6px;">
+                            <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);"><span style="color: var(--accent-red);">git reset --soft HEAD~1</span>
+<span style="color: var(--text-muted);"># Removes last commit</span>
+<span style="color: var(--text-muted);"># Keeps changes staged</span>
+
+<span style="color: var(--accent-red);">git reset --hard HEAD~1</span>
+<span style="color: var(--text-muted);"># Removes commit AND changes!</span></pre>
+                        </div>
+                        <p style="color: var(--accent-red); font-size: 0.85rem; margin-top: 0.75rem;">
+                            <strong>Use when:</strong> NOT pushed yet, want to "erase" mistakes
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-pink);" class="animate-on-scroll">📝 "How Often Should I Commit?"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(244,114,182,0.4);">
+                <div class="card-icon pink">💾</div>
+                <h3>Commit early, commit often — but make it logical</h3>
+                
+                <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                        <p style="color: var(--accent-green); font-weight: 600;">✅ Good commits:</p>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; margin-left: 1rem;">
+                            <li>"Add login form validation"</li>
+                            <li>"Fix header alignment on mobile"</li>
+                            <li>"Update API endpoint for users"</li>
+                        </ul>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">One logical change = one commit</p>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                        <p style="color: var(--accent-red); font-weight: 600;">❌ Bad commits:</p>
+                        <ul style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem; margin-left: 1rem;">
+                            <li>"WIP"</li>
+                            <li>"stuff"</li>
+                            <li>"Fixed everything and added features and also changed the database"</li>
+                        </ul>
+                        <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">Too vague or too big</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; color: var(--accent-pink); font-size: 0.9rem;">
+                    💡 <strong>Rule of thumb:</strong> If you can't describe it in ~50 characters, it's probably too big. Aim for commits every 15-60 minutes of work.
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-orange);" class="animate-on-scroll">📡 "Can I Work Offline?"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(245,158,11,0.4);">
+                <div class="card-icon orange">✈️</div>
+                <h3>YES! Git works completely offline</h3>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    Git is a <strong>distributed</strong> version control system. Your entire repo history lives on your computer. You only need internet to talk to GitHub.
+                </p>
+                
+                <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; text-align: center;">
+                        <p style="color: var(--accent-green); font-weight: 600;">✅ Works Offline</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                            git add<br>git commit<br>git branch<br>git checkout<br>git log<br>git diff<br>git merge
+                        </p>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; text-align: center;">
+                        <p style="color: var(--accent-red); font-weight: 600;">❌ Needs Internet</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                            git push<br>git pull<br>git fetch<br>git clone
+                        </p>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; color: var(--accent-orange); font-size: 0.9rem;">
+                    💡 <strong>Airplane mode workflow:</strong> Commit as much as you want offline. When you're back online, just <code>git push</code> and all your commits upload at once!
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-purple);" class="animate-on-scroll">✏️ "I Made a Typo in My Commit Message!"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(168,85,247,0.4);">
+                <div class="card-icon purple">📝</div>
+                <h3>Easy fix with <code>git commit --amend</code></h3>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                    <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># Just committed with a typo:</span>
+<span style="color: var(--text-muted);"># "Fix bugg in login" 😬</span>
+
+<span style="color: var(--text-muted);"># Fix it:</span>
+<span style="color: var(--accent-purple);">git commit --amend -m "Fix bug in login"</span>
+
+<span style="color: var(--text-muted);"># Or open editor to edit:</span>
+<span style="color: var(--accent-purple);">git commit --amend</span></pre>
+                </div>
+                
+                <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px;">
+                        <p style="color: var(--accent-green); font-size: 0.85rem;">✅ Safe if you <strong>haven't pushed yet</strong></p>
+                    </div>
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px;">
+                        <p style="color: var(--accent-red); font-size: 0.85rem;">⚠️ Risky if you <strong>already pushed</strong> (rewrites history)</p>
+                    </div>
+                </div>
+                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                    <strong>Bonus:</strong> <code>--amend</code> also lets you add forgotten files to the last commit!
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-red);" class="animate-on-scroll">👻 "What's 'Detached HEAD' State?!"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(239,68,68,0.4);">
+                <div class="card-icon red">😰</div>
+                <h3>Scary message, but not dangerous!</h3>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">
+                    <strong>What it means:</strong> You've checked out a specific commit instead of a branch. You're "detached" from any branch.
+                </p>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: rgba(245,158,11,0.1); border-radius: 8px; border: 1px solid rgba(245,158,11,0.3);">
+                    <p style="color: var(--accent-orange); font-size: 0.9rem;">
+                        <strong>How it happens:</strong> Usually when you <code>git checkout &lt;commit-hash&gt;</code> or check out a tag
+                    </p>
+                </div>
+                
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                    <p style="color: var(--accent-green); margin-bottom: 0.5rem;"><strong>To fix it:</strong></p>
+                    <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># Option 1: Go back to a branch</span>
+<span style="color: var(--accent-cyan);">git checkout main</span>
+
+<span style="color: var(--text-muted);"># Option 2: Create a branch from here (if you made changes)</span>
+<span style="color: var(--accent-cyan);">git checkout -b my-new-branch</span></pre>
+                </div>
+                <p style="margin-top: 1rem; color: var(--accent-green); font-size: 0.9rem;">
+                    💡 <strong>Remember:</strong> Any commits you make in detached HEAD state will be "lost" unless you create a branch. Git will warn you about this!
+                </p>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-cyan);" class="animate-on-scroll">🔄 "What's the Difference Between <code>git pull</code> and <code>git fetch</code>?"</h3>
+
+            <div class="card animate-on-scroll" style="border-color: rgba(0,212,255,0.4);">
+                <div class="card-icon cyan">📥</div>
+                <h3><code>fetch</code> = Download only &nbsp;&nbsp;|&nbsp;&nbsp; <code>pull</code> = Download + Merge</h3>
+                
+                <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                    <div style="padding: 1.5rem; background: rgba(0,212,255,0.1); border-radius: 8px; border: 1px solid rgba(0,212,255,0.3);">
+                        <p style="color: var(--accent-cyan); font-weight: 700;"><code>git fetch</code></p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                            Downloads changes from GitHub but <strong>doesn't touch your working files</strong>. You can review what changed before merging.
+                        </p>
+                        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 6px;">
+                            <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);"><span style="color: var(--accent-cyan);">git fetch origin</span>
+<span style="color: var(--accent-cyan);">git log HEAD..origin/main</span>
+<span style="color: var(--text-muted);"># See what's new</span>
+<span style="color: var(--accent-cyan);">git merge origin/main</span>
+<span style="color: var(--text-muted);"># Then merge when ready</span></pre>
+                        </div>
+                    </div>
+                    <div style="padding: 1.5rem; background: rgba(168,85,247,0.1); border-radius: 8px; border: 1px solid rgba(168,85,247,0.3);">
+                        <p style="color: var(--accent-purple); font-weight: 700;"><code>git pull</code></p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                            Downloads AND merges in one step. Convenient, but you have less control.
+                        </p>
+                        <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 6px;">
+                            <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);"><span style="color: var(--accent-purple);">git pull origin main</span>
+<span style="color: var(--text-muted);"># Same as:</span>
+<span style="color: var(--text-muted);"># git fetch origin</span>
+<span style="color: var(--text-muted);"># git merge origin/main</span></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 1rem; color: var(--accent-cyan); font-size: 0.9rem;">
+                    💡 <strong>When to use fetch:</strong> When you want to see changes before merging, or when working on complex merges. Most beginners can just use <code>git pull</code>.
+                </p>
+            </div>
+
+            <div class="pro-tip animate-on-scroll">
+                <div class="pro-tip-icon">🎯</div>
+                <div>
+                    <h4>Master Troubleshooting Tip: The Reflog Saves Everything!</h4>
+                    <p>If you ever think you've lost commits, use <code>git reflog</code> to see your entire history of actions. Git keeps "deleted" commits for ~90 days. You can recover almost anything with <code>git checkout &lt;hash&gt;</code> or <code>git reset --hard &lt;hash&gt;</code>!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SLIDE 16: Hands-On Exercise -->
     <section class="slide" id="exercise">
         <div class="slide-content">
-            <div class="section-number">Chapter 23</div>
+            <div class="section-number">Chapter 24</div>
             <h2 class="section-title">🎯 Hands-On Exercise: Team Collaboration</h2>
             <p class="section-subtitle">
                 Time to put everything into practice! Let's simulate a real team workflow.
@@ -6027,7 +6505,7 @@ credentials.json</pre>
     <!-- SLIDE: Production Deployment Best Practices (moved to end) -->
     <section class="slide" id="production">
         <div class="slide-content">
-            <div class="section-number">Chapter 24</div>
+            <div class="section-number">Chapter 25</div>
             <h2 class="section-title">🚀 Deploying to Production Without Breaking Things</h2>
             <p class="section-subtitle">
                 Your app is live with real users. How do you add features without causing chaos?
