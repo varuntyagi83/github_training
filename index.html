@@ -643,6 +643,71 @@
             font-size: 0.95rem;
         }
 
+        /* Collapsible Deep Dive Box */
+        .deep-dive {
+            background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(168,85,247,0.02) 100%);
+            border: 1px solid rgba(168,85,247,0.3);
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .deep-dive summary {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            color: var(--accent-purple);
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+
+        .deep-dive summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .deep-dive summary::before {
+            content: '▶';
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .deep-dive[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .deep-dive summary:hover {
+            background: rgba(168,85,247,0.1);
+        }
+
+        .deep-dive-icon {
+            font-size: 1.25rem;
+        }
+
+        .deep-dive-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(168,85,247,0.2);
+        }
+
+        .deep-dive-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .deep-dive-content h4 {
+            color: var(--accent-cyan);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 1.25rem 0 0.75rem;
+        }
+
+        .deep-dive-content h4:first-child {
+            margin-top: 1rem;
+        }
+
         /* Warning Box */
         .warning-box {
             background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.02) 100%);
@@ -1300,6 +1365,7 @@
                         <a href="#conflicts">Conflicts</a>
                         <a href="#github-pages">Pages</a>
                         <a href="#open-source">Open Source</a>
+                        <a href="#git-internals">Git Internals</a>
                         <a href="#secret-sauce">Pro Tips</a>
                         <a href="#exhaustive-qa">Troubleshooting</a>
                         <a href="#qa">Q&A</a>
@@ -5659,10 +5725,715 @@ Dockerfile        @devops-team
         </div>
     </section>
 
+    <!-- SLIDE: Git Internals (Optional Advanced Section) -->
+    <section class="slide" id="git-internals">
+        <div class="slide-content">
+            <div class="section-number">Chapter 21 (Advanced)</div>
+            <h2 class="section-title">🔬 Git Internals: Under the Hood</h2>
+            <p class="section-subtitle">
+                <em>Optional deep dive for curious minds.</em> Understanding how Git really works helps you master advanced operations and recover from mistakes.
+            </p>
+
+            <div class="warning-box animate-on-scroll" style="border-color: rgba(168,85,247,0.3); background: linear-gradient(135deg, rgba(168,85,247,0.1) 0%, rgba(168,85,247,0.02) 100%);">
+                <div class="warning-box-icon">🎓</div>
+                <div>
+                    <h4 style="color: var(--accent-purple);">Advanced Content Ahead!</h4>
+                    <p>This section is optional. You can be productive with Git without understanding internals. But if you want to truly master Git, understanding these concepts will make everything click!</p>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif;" class="animate-on-scroll">🌳 The Four Git Objects</h3>
+
+            <p class="animate-on-scroll" style="color: var(--text-secondary); margin-bottom: 1.5rem;">
+                Git is fundamentally a <strong>content-addressable filesystem</strong>. Everything is stored as one of four object types:
+            </p>
+
+            <div class="card-grid animate-on-scroll">
+                <div class="card" style="border-color: rgba(0,212,255,0.3);">
+                    <div class="card-icon cyan">📄</div>
+                    <h3>Blob</h3>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        <strong>Binary Large Object</strong> — stores the actual content of a file. Just the raw bytes, no filename or metadata.
+                    </p>
+                    <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 8px;">
+                        <code style="color: var(--accent-cyan); font-size: 0.85rem;">e69de29bb2d1d6434b8b29ae775ad8c2e48c5391</code>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(34,197,94,0.3);">
+                    <div class="card-icon green">🌳</div>
+                    <h3>Tree</h3>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        A directory listing. Points to blobs (files) and other trees (subdirectories) with their names and permissions.
+                    </p>
+                    <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.8rem;">
+                        <code style="color: var(--text-muted);">100644 blob abc123 → index.html</code><br>
+                        <code style="color: var(--text-muted);">040000 tree def456 → css/</code>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(168,85,247,0.3);">
+                    <div class="card-icon purple">📦</div>
+                    <h3>Commit</h3>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        Points to a tree (project snapshot) + metadata: author, committer, message, timestamp, and parent commit(s).
+                    </p>
+                    <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.8rem;">
+                        <code style="color: var(--text-muted);">tree: 4a5f3c...</code><br>
+                        <code style="color: var(--text-muted);">parent: 8b2e1a...</code><br>
+                        <code style="color: var(--text-muted);">author: Varun &lt;...&gt;</code>
+                    </div>
+                </div>
+                <div class="card" style="border-color: rgba(244,114,182,0.3);">
+                    <div class="card-icon pink">🏷️</div>
+                    <h3>Tag</h3>
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                        An annotated tag object. Points to a commit with extra info: tagger, date, message. (Lightweight tags are just refs.)
+                    </p>
+                    <div style="margin-top: 1rem; padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.8rem;">
+                        <code style="color: var(--text-muted);">object: 9c3d7f...</code><br>
+                        <code style="color: var(--text-muted);">tag: v1.0.0</code><br>
+                        <code style="color: var(--text-muted);">tagger: Varun &lt;...&gt;</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip animate-on-scroll" style="border-color: rgba(0,212,255,0.3); background: linear-gradient(135deg, rgba(0,212,255,0.1) 0%, rgba(0,212,255,0.02) 100%);">
+                <div class="pro-tip-icon">🎯</div>
+                <div>
+                    <h4 style="color: var(--accent-cyan);">Important: You Work on Branches, Not Trees!</h4>
+                    <p>A common source of confusion: <strong>branches</strong> and <strong>trees</strong> sound similar but serve completely different purposes.</p>
+                    <div style="margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                            <p style="color: var(--accent-green); font-weight: 600;">🌿 Branches — YOU control these</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                Create: <code>git branch feature</code><br>
+                                Switch: <code>git checkout feature</code><br>
+                                Merge: <code>git merge feature</code><br>
+                                Delete: <code>git branch -d feature</code>
+                            </p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(168,85,247,0.1); border-radius: 8px; border: 1px solid rgba(168,85,247,0.3);">
+                            <p style="color: var(--accent-purple); font-weight: 600;">🌳 Trees — Git handles automatically</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                Created when you <code>git commit</code><br>
+                                Stores directory structure internally<br>
+                                You rarely create/edit trees directly<br>
+                                <em>(Experts CAN — see Expert section below)</em>
+                            </p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                        <strong>Bottom line:</strong> For day-to-day work, you use branches. Trees are internal objects Git manages for you. <em>Expert users</em> can manipulate trees directly using "plumbing" commands — but this is covered in the Expert-Only section below and is NOT recommended for beginners or intermediate users.
+                    </p>
+                </div>
+            </div>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-purple);" class="animate-on-scroll">🔍 Want to Go Deeper? Click to Expand</h3>
+
+            <p class="animate-on-scroll" style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
+                Jump to: 
+                <a href="#deep-dive-branches-trees" style="color: var(--accent-cyan);">Branches vs Trees</a> • 
+                <a href="#deep-dive-sha1" style="color: var(--accent-cyan);">SHA-1 Hashes</a> • 
+                <a href="#deep-dive-git-directory" style="color: var(--accent-cyan);">.git Directory</a> • 
+                <a href="#deep-dive-commands" style="color: var(--accent-cyan);">How Commands Work</a><br>
+                <span style="color: var(--accent-red);">🚨 Expert Only:</span>
+                <a href="#deep-dive-plumbing" style="color: var(--accent-red);">Working with Trees</a> • 
+                <a href="#deep-dive-bisect" style="color: var(--accent-red);">Git Bisect</a> • 
+                <a href="#deep-dive-fast-forward" style="color: var(--accent-red);">Fast-Forward Merges</a> • 
+                <a href="#deep-dive-cherry-pick" style="color: var(--accent-red);">Cherry-Pick</a>
+            </p>
+
+            <!-- Deep Dive 1: Branches vs Trees -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-branches-trees">
+                <summary>
+                    <span class="deep-dive-icon">🌿</span>
+                    Deep Dive: Branches vs Trees — What's the Difference?
+                </summary>
+                <div class="deep-dive-content">
+                    <p>
+                        This is one of the most common confusions in Git. Despite the similar names, <strong>branches</strong> and <strong>trees</strong> are completely different concepts!
+                    </p>
+
+                    <h4>🌿 Branch = A Movable Pointer</h4>
+                    <p>
+                        A branch is literally just a 40-character file containing a commit hash. That's it! When you create a branch, Git creates a tiny file (41 bytes) that points to a commit.
+                    </p>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># What's inside .git/refs/heads/main?</span>
+<span style="color: var(--accent-cyan);">$ cat .git/refs/heads/main</span>
+a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0
+
+<span style="color: var(--text-muted);"># That's the ENTIRE branch! Just 40 characters.</span></pre>
+                    </div>
+
+                    <h4>🌳 Tree = A Directory Snapshot</h4>
+                    <p>
+                        A tree is a Git object that represents a directory at a specific point in time. It maps filenames to blobs (file contents) and other trees (subdirectories).
+                    </p>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># View a tree object:</span>
+<span style="color: var(--accent-cyan);">$ git cat-file -p HEAD^{tree}</span>
+100644 blob 8ab12c... README.md
+100644 blob 3df45e... index.html
+040000 tree 7gh89i... css
+040000 tree 2jk34l... js</pre>
+                    </div>
+
+                    <h4>🔗 How They Connect</h4>
+                    <div style="margin: 1rem 0; padding: 1.5rem; background: rgba(0,212,255,0.05); border-radius: 12px; border: 1px solid rgba(0,212,255,0.2);">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--text-secondary); text-align: center; line-height: 2;">
+<span style="color: var(--accent-green);">BRANCH</span> → <span style="color: var(--accent-purple);">COMMIT</span> → <span style="color: var(--accent-cyan);">TREE</span> → <span style="color: var(--accent-orange);">BLOBS + TREES</span>
+   │           │           │              │
+<span style="color: var(--text-muted);">"main"</span>    <span style="color: var(--text-muted);">metadata</span>   <span style="color: var(--text-muted);">root dir</span>    <span style="color: var(--text-muted);">files & folders</span>
+<span style="color: var(--text-muted);">(pointer)</span>  <span style="color: var(--text-muted);">(snapshot)</span> <span style="color: var(--text-muted);">(listing)</span>   <span style="color: var(--text-muted);">(content)</span></pre>
+                    </div>
+
+                    <p style="color: var(--accent-green);">
+                        <strong>💡 Key Insight:</strong> Creating 100 branches doesn't duplicate any files! Each branch is just a 41-byte pointer. This is why Git branches are "cheap" and fast.
+                    </p>
+                </div>
+            </details>
+
+            <!-- Deep Dive 2: Content-Addressable Storage -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-sha1">
+                <summary>
+                    <span class="deep-dive-icon">🔐</span>
+                    Deep Dive: SHA-1 Hashes & Content-Addressable Storage
+                </summary>
+                <div class="deep-dive-content">
+                    <p>
+                        Every Git object is identified by a <strong>SHA-1 hash</strong> of its content. This 40-character hexadecimal string is like a fingerprint — if the content changes even slightly, the hash changes completely.
+                    </p>
+
+                    <h4>Why This Matters</h4>
+                    <div style="margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px;">
+                            <p style="color: var(--accent-green); font-weight: 600;">✅ Integrity</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem;">If any bit changes, the hash changes. Git detects corruption automatically.</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(0,212,255,0.1); border-radius: 8px;">
+                            <p style="color: var(--accent-cyan); font-weight: 600;">✅ Deduplication</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem;">Same content = same hash. File stored once, referenced many times.</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(168,85,247,0.1); border-radius: 8px;">
+                            <p style="color: var(--accent-purple); font-weight: 600;">✅ Immutability</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem;">Objects can't be modified, only new ones created. History is append-only.</p>
+                        </div>
+                    </div>
+
+                    <h4>Example: Same File = Same Hash</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># Two different files with SAME content:</span>
+<span style="color: var(--accent-cyan);">$ echo "Hello World" > file1.txt</span>
+<span style="color: var(--accent-cyan);">$ echo "Hello World" > file2.txt</span>
+<span style="color: var(--accent-cyan);">$ git hash-object file1.txt</span>
+557db03de997c86a4a028e1ebd3a1ceb225be238
+<span style="color: var(--accent-cyan);">$ git hash-object file2.txt</span>
+557db03de997c86a4a028e1ebd3a1ceb225be238  <span style="color: var(--accent-green);">← Same hash!</span>
+
+<span style="color: var(--text-muted);"># Git stores this content ONCE, not twice</span></pre>
+                    </div>
+
+                    <p style="color: var(--accent-cyan);">
+                        <strong>💡 Fun Fact:</strong> Git is transitioning from SHA-1 to SHA-256 for even stronger security. The concepts remain the same!
+                    </p>
+                </div>
+            </details>
+
+            <!-- Deep Dive 3: The .git Directory -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-git-directory">
+                <summary>
+                    <span class="deep-dive-icon">📂</span>
+                    Deep Dive: Inside the .git Directory
+                </summary>
+                <div class="deep-dive-content">
+                    <p>
+                        The <code>.git</code> folder IS your repository. Everything else is just a "working copy." Understanding its structure demystifies Git operations.
+                    </p>
+
+                    <div style="margin: 1rem 0; padding: 1.5rem; background: var(--bg-code); border-radius: 12px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8;"><span style="color: var(--accent-cyan);">.git/</span>
+├── <span style="color: var(--accent-green);">HEAD</span>           <span style="color: var(--text-muted);"># Points to current branch (ref: refs/heads/main)</span>
+├── <span style="color: var(--accent-green);">config</span>         <span style="color: var(--text-muted);"># Repository settings</span>
+├── <span style="color: var(--accent-green);">index</span>          <span style="color: var(--text-muted);"># Staging area (binary file)</span>
+├── <span style="color: var(--accent-purple);">objects/</span>       <span style="color: var(--text-muted);"># ALL content (blobs, trees, commits, tags)</span>
+│   ├── <span style="color: var(--text-muted);">55/7db03de...</span>  <span style="color: var(--text-muted);"># Objects stored by hash prefix</span>
+│   ├── <span style="color: var(--text-muted);">info/</span>
+│   └── <span style="color: var(--text-muted);">pack/</span>       <span style="color: var(--text-muted);"># Compressed object storage</span>
+├── <span style="color: var(--accent-purple);">refs/</span>          <span style="color: var(--text-muted);"># References (branches, tags)</span>
+│   ├── <span style="color: var(--accent-orange);">heads/</span>     <span style="color: var(--text-muted);"># Local branches (main, feature-x)</span>
+│   ├── <span style="color: var(--accent-orange);">remotes/</span>   <span style="color: var(--text-muted);"># Remote tracking (origin/main)</span>
+│   └── <span style="color: var(--accent-orange);">tags/</span>      <span style="color: var(--text-muted);"># Tag references</span>
+├── <span style="color: var(--accent-green);">hooks/</span>         <span style="color: var(--text-muted);"># Scripts that run on events</span>
+└── <span style="color: var(--accent-green);">logs/</span>          <span style="color: var(--text-muted);"># Reflog history (your safety net!)</span></pre>
+                    </div>
+
+                    <h4>🔍 Explore Your Own Repo</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># See what HEAD points to:</span>
+<span style="color: var(--accent-cyan);">$ cat .git/HEAD</span>
+ref: refs/heads/main
+
+<span style="color: var(--text-muted);"># See the commit hash of main:</span>
+<span style="color: var(--accent-cyan);">$ cat .git/refs/heads/main</span>
+a1b2c3d4e5f6...
+
+<span style="color: var(--text-muted);"># Examine any object:</span>
+<span style="color: var(--accent-cyan);">$ git cat-file -t a1b2c3</span>  <span style="color: var(--text-muted);"># type: commit/tree/blob</span>
+<span style="color: var(--accent-cyan);">$ git cat-file -p a1b2c3</span>  <span style="color: var(--text-muted);"># pretty-print contents</span></pre>
+                    </div>
+
+                    <p style="color: var(--accent-purple);">
+                        <strong>💡 Recovery Tip:</strong> The <code>.git/logs</code> folder contains your reflog — a history of where HEAD and branches have pointed. Even "deleted" commits are recoverable from here for ~90 days!
+                    </p>
+                </div>
+            </details>
+
+            <!-- Deep Dive 4: How Git Commands Map to Internals -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-commands">
+                <summary>
+                    <span class="deep-dive-icon">⚡</span>
+                    Deep Dive: How Common Commands Work Internally
+                </summary>
+                <div class="deep-dive-content">
+                    <p>
+                        Understanding what commands do "under the hood" helps you predict their behavior and recover from mistakes.
+                    </p>
+
+                    <div style="margin: 1rem 0; overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="background: var(--bg-card);">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--accent-cyan);">Command</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--accent-cyan);">What It Actually Does</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git add file.txt</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Creates blob object in <code>.git/objects</code>, updates <code>.git/index</code> (staging area)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git commit</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Creates tree from index, creates commit pointing to tree, updates branch ref</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git branch feature</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Creates file <code>.git/refs/heads/feature</code> containing current commit hash</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git checkout main</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Updates HEAD to point to main, updates working directory to match main's tree</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git merge feature</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Creates new commit with TWO parents, combines trees, updates current branch</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git reset --hard HEAD~1</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Moves branch ref to previous commit, updates index and working directory</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.75rem;"><code>git reflog</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Reads <code>.git/logs/HEAD</code> to show history of HEAD movements</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="color: var(--accent-green); margin-top: 1rem;">
+                        <strong>💡 Key Insight:</strong> Most Git commands just manipulate small text files (refs) and create immutable objects. Nothing is ever truly deleted — old commits remain in the object database until garbage collection (typically 90+ days).
+                    </p>
+                </div>
+            </details>
+
+            <h3 style="margin: 2rem 0 1rem; font-family: 'Space Grotesk', sans-serif; color: var(--accent-red);" class="animate-on-scroll">🚨 Expert-Only Territory — Stop Here If You're Learning!</h3>
+
+            <div class="warning-box animate-on-scroll" style="border-width: 2px;">
+                <div class="warning-box-icon">⛔</div>
+                <div>
+                    <h4>For Senior Developers & Git Power Users ONLY!</h4>
+                    <p style="margin-bottom: 0.75rem;">
+                        <strong style="color: var(--accent-red);">🚫 NOT for beginners. 🚫 NOT for intermediate users.</strong>
+                    </p>
+                    <p>The following commands are <strong>only for experienced developers</strong> who have been using Git professionally for years. If you're still learning Git or consider yourself intermediate level:</p>
+                    <ul style="margin: 0.75rem 0 0.75rem 1.5rem; color: var(--text-secondary);">
+                        <li><strong>Skip these entirely</strong> — you don't need them for 99% of daily work</li>
+                        <li><strong>Using them incorrectly</strong> can create confusing history, duplicate commits, or leave your repo in a strange state</li>
+                        <li><strong>Master the basics first</strong> — branch, commit, push, pull, merge, resolve conflicts</li>
+                    </ul>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">
+                        <em>Come back to these topics after 1-2 years of daily Git usage, when you encounter specific problems these tools solve.</em>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Deep Dive 5: Working With Trees Directly (Plumbing) -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-plumbing" style="border-color: rgba(239,68,68,0.3); background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.02) 100%);">
+                <summary>
+                    <span class="deep-dive-icon">🛠️</span>
+                    Deep Dive: Working With Trees Directly — Plumbing Commands (Expert Only)
+                </summary>
+                <div class="deep-dive-content">
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); margin-bottom: 1rem;">
+                        <p style="color: var(--accent-red); font-weight: 600;">⛔ Expert-Level Commands</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">These "plumbing" commands are NOT for regular users. They're used for scripting, building Git tools, and low-level repository manipulation. Using them incorrectly can corrupt your repository.</p>
+                    </div>
+
+                    <p>
+                        <strong>Yes, you can work with trees directly!</strong> Git provides "plumbing" commands for direct tree manipulation. These are low-level commands used for scripting, automation, and building Git tools.
+                    </p>
+
+                    <h4>Plumbing vs Porcelain Commands</h4>
+                    <div style="margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(34,197,94,0.1); border-radius: 8px; border: 1px solid rgba(34,197,94,0.3);">
+                            <p style="color: var(--accent-green); font-weight: 600;">🚿 Porcelain (User-Friendly)</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                <code>git add</code>, <code>git commit</code>, <code>git push</code>, <code>git merge</code>, <code>git checkout</code>
+                            </p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">✅ What 99% of users should use</p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                            <p style="color: var(--accent-red); font-weight: 600;">🔧 Plumbing (Low-Level)</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                <code>git hash-object</code>, <code>git cat-file</code>, <code>git write-tree</code>, <code>git read-tree</code>
+                            </p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem; margin-top: 0.5rem;">⚠️ Only for scripts and experts</p>
+                        </div>
+                    </div>
+
+                    <h4>Tree Manipulation Commands</h4>
+                    <div style="margin: 1rem 0; overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                            <thead>
+                                <tr style="background: var(--bg-card);">
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--accent-red);">Command</th>
+                                    <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid var(--accent-red);">What It Does</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git ls-tree HEAD</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">List contents of a tree (files & subdirectories)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git write-tree</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Create a tree object from the current staging area (index)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git read-tree &lt;tree&gt;</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Read a tree into the staging area (index)</td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-color);">
+                                    <td style="padding: 0.75rem;"><code>git mktree</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Build a tree object from scratch via stdin</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0.75rem;"><code>git commit-tree &lt;tree&gt;</code></td>
+                                    <td style="padding: 0.75rem; color: var(--text-secondary);">Create a commit pointing to a specific tree</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4>When Would an Expert Use This?</h4>
+                    <div style="margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem;">
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.85rem;">
+                            <span style="color: var(--accent-cyan);">🔧</span> Building custom Git tools
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.85rem;">
+                            <span style="color: var(--accent-green);">📜</span> Scripting & automation
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.85rem;">
+                            <span style="color: var(--accent-purple);">🔬</span> Repository forensics
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.85rem;">
+                            <span style="color: var(--accent-orange);">🏗️</span> Creating commits programmatically
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.85rem;">
+                            <span style="color: var(--accent-pink);">🩺</span> History surgery / grafting
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px; font-size: 0.85rem;">
+                            <span style="color: var(--accent-cyan);">📚</span> Understanding Git internals
+                        </div>
+                    </div>
+
+                    <h4>Example: Creating a Commit Using Only Plumbing</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;"><span style="color: var(--text-muted);"># 1. Create a blob (file content)</span>
+<span style="color: var(--accent-cyan);">$ echo "Hello World" | git hash-object -w --stdin</span>
+557db03de997c86a4a028e1ebd3a1ceb225be238
+
+<span style="color: var(--text-muted);"># 2. Add blob to staging area with a filename</span>
+<span style="color: var(--accent-cyan);">$ git update-index --add --cacheinfo 100644 557db03... hello.txt</span>
+
+<span style="color: var(--text-muted);"># 3. Create a tree from the staging area</span>
+<span style="color: var(--accent-cyan);">$ git write-tree</span>
+4b825dc642cb6eb9a060e54bf8d69288fbee4904
+
+<span style="color: var(--text-muted);"># 4. Create a commit pointing to that tree</span>
+<span style="color: var(--accent-cyan);">$ echo "Initial commit" | git commit-tree 4b825dc...</span>
+a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0
+
+<span style="color: var(--text-muted);"># This is what `git add` + `git commit` does internally!</span></pre>
+                    </div>
+
+                    <p style="color: var(--accent-red); margin-top: 1rem;">
+                        <strong>⚠️ Warning:</strong> These commands bypass Git's safety checks. Stick to porcelain commands (<code>git add</code>, <code>git commit</code>) for normal work. Plumbing is only for when you need surgical precision and know exactly what you're doing.
+                    </p>
+                </div>
+            </details>
+
+            <!-- Deep Dive 6: Git Bisect -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-bisect" style="border-color: rgba(239,68,68,0.3); background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.02) 100%);">
+                <summary>
+                    <span class="deep-dive-icon">🔍</span>
+                    Deep Dive: Git Bisect — Binary Search for Bugs (Expert Only)
+                </summary>
+                <div class="deep-dive-content">
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); margin-bottom: 1rem;">
+                        <p style="color: var(--accent-red); font-weight: 600;">⛔ Expert-Level Command</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">This is NOT for beginners or intermediate users. Only use if you're comfortable with Git history, commits, and debugging workflows.</p>
+                    </div>
+
+                    <p>
+                        <code>git bisect</code> helps you find exactly which commit introduced a bug using binary search. Instead of checking every commit one by one, it cuts the search space in half each time.
+                    </p>
+
+                    <h4>When Would You Use This?</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>A bug appeared, but you don't know which of 500 commits caused it</li>
+                        <li>Something worked last month but is broken now</li>
+                        <li>You need to pinpoint the exact commit that broke a feature</li>
+                    </ul>
+
+                    <h4>How It Works</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.8;"><span style="color: var(--text-muted);"># 1. Start bisecting</span>
+<span style="color: var(--accent-cyan);">git bisect start</span>
+
+<span style="color: var(--text-muted);"># 2. Mark current commit as "bad" (has the bug)</span>
+<span style="color: var(--accent-red);">git bisect bad</span>
+
+<span style="color: var(--text-muted);"># 3. Mark an old commit as "good" (before the bug existed)</span>
+<span style="color: var(--accent-green);">git bisect good abc123</span>
+
+<span style="color: var(--text-muted);"># 4. Git checks out a commit in the middle</span>
+<span style="color: var(--text-muted);">#    Test if the bug exists, then tell Git:</span>
+<span style="color: var(--accent-green);">git bisect good</span>   <span style="color: var(--text-muted);"># if this commit is OK</span>
+<span style="color: var(--accent-red);">git bisect bad</span>    <span style="color: var(--text-muted);"># if this commit has the bug</span>
+
+<span style="color: var(--text-muted);"># 5. Repeat until Git finds the exact commit</span>
+<span style="color: var(--text-muted);"># Git will say: "abc123 is the first bad commit"</span>
+
+<span style="color: var(--text-muted);"># 6. When done, reset to normal</span>
+<span style="color: var(--accent-cyan);">git bisect reset</span></pre>
+                    </div>
+
+                    <h4>Example: 1000 Commits → Found in ~10 Steps</h4>
+                    <div style="margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem; text-align: center;">
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--accent-cyan); font-weight: 600;">1000 commits</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">~10 steps</p>
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--accent-cyan); font-weight: 600;">500 commits</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">~9 steps</p>
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--accent-cyan); font-weight: 600;">100 commits</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">~7 steps</p>
+                        </div>
+                        <div style="padding: 0.75rem; background: var(--bg-code); border-radius: 8px;">
+                            <p style="color: var(--accent-cyan); font-weight: 600;">10 commits</p>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">~4 steps</p>
+                        </div>
+                    </div>
+
+                    <p style="color: var(--accent-red); margin-top: 1rem;">
+                        <strong>⚠️ Warning:</strong> During bisect, Git checks out old commits, putting you in "detached HEAD" state. Don't make changes or commit while bisecting. Always finish with <code>git bisect reset</code>.
+                    </p>
+                </div>
+            </details>
+
+            <!-- Deep Dive 7: Fast-Forward Merges -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-fast-forward" style="border-color: rgba(239,68,68,0.3); background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.02) 100%);">
+                <summary>
+                    <span class="deep-dive-icon">⏩</span>
+                    Deep Dive: Fast-Forward vs Three-Way Merges (Expert Only)
+                </summary>
+                <div class="deep-dive-content">
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); margin-bottom: 1rem;">
+                        <p style="color: var(--accent-red); font-weight: 600;">⛔ Expert-Level Concept</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Understanding merge types is useful but NOT essential for daily work. Beginners can use <code>git merge</code> without knowing these details — Git handles it automatically.</p>
+                    </div>
+
+                    <p>
+                        When you run <code>git merge</code>, Git chooses between two strategies based on your branch history. Understanding this helps explain why some merges create commits and others don't.
+                    </p>
+
+                    <h4>⏩ Fast-Forward Merge</h4>
+                    <p style="color: var(--text-secondary);">Happens when the target branch has NO new commits since you branched off.</p>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;"><span style="color: var(--accent-cyan);">Before:</span>
+main:     A ── B ── C
+                    ↑ (main is here)
+feature:            C ── D ── E
+                              ↑ (feature is here)
+
+<span style="color: var(--accent-green);">After git merge feature:</span>
+main:     A ── B ── C ── D ── E
+                              ↑ (main just moves forward!)
+
+<span style="color: var(--text-muted);">No merge commit created — main pointer simply "fast-forwards"</span></pre>
+                    </div>
+
+                    <h4>🔀 Three-Way Merge</h4>
+                    <p style="color: var(--text-secondary);">Happens when BOTH branches have new commits (they've diverged).</p>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;"><span style="color: var(--accent-cyan);">Before:</span>
+main:     A ── B ── C ── F ── G
+                    ↑         ↑ (main has NEW commits)
+feature:            C ── D ── E
+                              ↑ (feature also has commits)
+
+<span style="color: var(--accent-green);">After git merge feature:</span>
+main:     A ── B ── C ── F ── G ── <span style="color: var(--accent-purple);">M</span>
+                    \            /
+                     D ── E ────┘
+
+<span style="color: var(--text-muted);">Merge commit (M) created with TWO parents: G and E</span></pre>
+                    </div>
+
+                    <h4>Why Does This Matter?</h4>
+                    <div style="margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(0,212,255,0.1); border-radius: 8px; border: 1px solid rgba(0,212,255,0.3);">
+                            <p style="color: var(--accent-cyan); font-weight: 600;">Fast-Forward</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                ✅ Clean, linear history<br>
+                                ✅ No extra merge commits<br>
+                                ⚠️ Loses branch context
+                            </p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(168,85,247,0.1); border-radius: 8px; border: 1px solid rgba(168,85,247,0.3);">
+                            <p style="color: var(--accent-purple); font-weight: 600;">Three-Way Merge</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                ✅ Preserves branch history<br>
+                                ✅ Clear merge points<br>
+                                ⚠️ More complex history
+                            </p>
+                        </div>
+                    </div>
+
+                    <h4>Forcing a Merge Commit (Even When FF is Possible)</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);"><span style="color: var(--text-muted);"># Always create a merge commit (preserve branch history)</span>
+<span style="color: var(--accent-purple);">git merge --no-ff feature</span>
+
+<span style="color: var(--text-muted);"># Only allow fast-forward (fail if not possible)</span>
+<span style="color: var(--accent-cyan);">git merge --ff-only feature</span></pre>
+                    </div>
+
+                    <p style="color: var(--accent-red); margin-top: 1rem;">
+                        <strong>💡 For most users:</strong> Just use <code>git merge</code> and let Git decide. Only worry about <code>--no-ff</code> or <code>--ff-only</code> if you have specific history requirements or team conventions.
+                    </p>
+                </div>
+            </details>
+
+            <!-- Deep Dive 8: Cherry-Pick -->
+            <details class="deep-dive animate-on-scroll" id="deep-dive-cherry-pick" style="border-color: rgba(239,68,68,0.3); background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(239,68,68,0.02) 100%);">
+                <summary>
+                    <span class="deep-dive-icon">🍒</span>
+                    Deep Dive: Git Cherry-Pick — Surgical Commit Selection (Expert Only)
+                </summary>
+                <div class="deep-dive-content">
+                    <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3); margin-bottom: 1rem;">
+                        <p style="color: var(--accent-red); font-weight: 600;">⛔ Expert-Level Command</p>
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Cherry-pick can cause duplicate commits and confusing history if misused. Only use when you specifically need ONE commit from another branch without merging everything.</p>
+                    </div>
+
+                    <p>
+                        <code>git cherry-pick</code> copies a specific commit from one branch and applies it to your current branch. It's like saying "I want JUST this one change, not the whole branch."
+                    </p>
+
+                    <h4>When Would You Use This?</h4>
+                    <ul style="color: var(--text-secondary); margin-left: 1.5rem; margin-bottom: 1rem;">
+                        <li>A bug fix on <code>develop</code> needs to go to <code>main</code> immediately</li>
+                        <li>You accidentally committed to the wrong branch</li>
+                        <li>You need one specific feature from a long-running branch</li>
+                        <li>Backporting fixes to older release branches</li>
+                    </ul>
+
+                    <h4>Basic Usage</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.8;"><span style="color: var(--text-muted);"># 1. Find the commit hash you want</span>
+<span style="color: var(--accent-cyan);">git log --oneline feature-branch</span>
+<span style="color: var(--text-muted);"># Output: abc123 Fix critical bug</span>
+<span style="color: var(--text-muted);">#         def456 Add new feature</span>
+<span style="color: var(--text-muted);">#         ghi789 Update styles</span>
+
+<span style="color: var(--text-muted);"># 2. Switch to your target branch</span>
+<span style="color: var(--accent-cyan);">git checkout main</span>
+
+<span style="color: var(--text-muted);"># 3. Cherry-pick the specific commit</span>
+<span style="color: var(--accent-purple);">git cherry-pick abc123</span>
+
+<span style="color: var(--text-muted);"># Now main has a COPY of that commit with a NEW hash</span></pre>
+                    </div>
+
+                    <h4>Visual: What Happens</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: var(--bg-code); border-radius: 8px;">
+                        <pre style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;"><span style="color: var(--accent-cyan);">Before:</span>
+main:     A ── B ── C
+feature:  A ── B ── D ── <span style="color: var(--accent-green);">E (bug fix)</span> ── F
+
+<span style="color: var(--accent-purple);">After cherry-pick E:</span>
+main:     A ── B ── C ── <span style="color: var(--accent-green);">E' (copy of E)</span>
+feature:  A ── B ── D ── E ── F
+
+<span style="color: var(--text-muted);">Note: E and E' have DIFFERENT hashes but same changes</span></pre>
+                    </div>
+
+                    <h4>⚠️ Dangers & Gotchas</h4>
+                    <div style="margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; background: rgba(239,68,68,0.1); border-radius: 8px; border: 1px solid rgba(239,68,68,0.3);">
+                            <p style="color: var(--accent-red); font-weight: 600;">❌ Duplicate Commits</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                If you later merge the original branch, you'll have TWO copies of the same change (different hashes).
+                            </p>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(245,158,11,0.1); border-radius: 8px; border: 1px solid rgba(245,158,11,0.3);">
+                            <p style="color: var(--accent-orange); font-weight: 600;">⚠️ Conflicts</p>
+                            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.5rem;">
+                                Cherry-picked commits may conflict if context has changed. Resolve like any merge conflict.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p style="color: var(--accent-red); margin-top: 1rem;">
+                        <strong>💡 Rule of thumb:</strong> If you need multiple commits or will eventually merge the branch anyway, use <code>git merge</code> instead. Cherry-pick is for surgical, one-off situations only.
+                    </p>
+                </div>
+            </details>
+
+            <div class="analogy-box animate-on-scroll" style="margin-top: 2rem;">
+                <div class="analogy-title">🎯 Why This Matters for You</div>
+                <p>
+                    Understanding Git internals helps you:<br><br>
+                    <strong>1. Recover from mistakes</strong> — "Deleted" commits aren't really gone. Use <code>git reflog</code> to find them.<br><br>
+                    <strong>2. Understand advanced commands</strong> — Rebase, cherry-pick, and reset make sense when you know they're just moving pointers.<br><br>
+                    <strong>3. Debug issues</strong> — When something goes wrong, you can inspect objects directly with <code>git cat-file</code>.<br><br>
+                    <strong>4. Trust Git</strong> — SHA-1 hashes guarantee your code hasn't been tampered with or corrupted.
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- SLIDE 21: Best Practices -->
     <section class="slide" id="best-practices">
         <div class="slide-content">
-            <div class="section-number">Chapter 21</div>
+            <div class="section-number">Chapter 22</div>
             <h2 class="section-title">Best Practices</h2>
             <p class="section-subtitle">
                 Follow these guidelines and you'll be a joy to collaborate with!
@@ -5793,7 +6564,7 @@ credentials.json</pre>
     <!-- SLIDE 15: Secret Sauce -->
     <section class="slide" id="secret-sauce">
         <div class="slide-content">
-            <div class="section-number">Chapter 22</div>
+            <div class="section-number">Chapter 23</div>
             <h2 class="section-title">🔥 Secret Sauce: Pro Tips</h2>
             <p class="section-subtitle">
                 Level up your Git game with these power user tips and tricks!
@@ -5920,7 +6691,7 @@ credentials.json</pre>
     <!-- SLIDE: Exhaustive Q&A / Troubleshooting -->
     <section class="slide" id="exhaustive-qa">
         <div class="slide-content">
-            <div class="section-number">Chapter 23</div>
+            <div class="section-number">Chapter 24</div>
             <h2 class="section-title">❓ Common Questions & Troubleshooting</h2>
             <p class="section-subtitle">
                 Everything beginners ask (and are afraid to ask). If you've ever panicked, the answer is probably here!
@@ -6238,7 +7009,7 @@ credentials.json</pre>
     <!-- SLIDE 16: Hands-On Exercise -->
     <section class="slide" id="exercise">
         <div class="slide-content">
-            <div class="section-number">Chapter 24</div>
+            <div class="section-number">Chapter 25</div>
             <h2 class="section-title">🎯 Hands-On Exercise: Team Collaboration</h2>
             <p class="section-subtitle">
                 Time to put everything into practice! Let's simulate a real team workflow.
@@ -6509,7 +7280,7 @@ credentials.json</pre>
     <!-- SLIDE: Production Deployment Best Practices (moved to end) -->
     <section class="slide" id="production">
         <div class="slide-content">
-            <div class="section-number">Chapter 25</div>
+            <div class="section-number">Chapter 26</div>
             <h2 class="section-title">🚀 Deploying to Production Without Breaking Things</h2>
             <p class="section-subtitle">
                 Your app is live with real users. How do you add features without causing chaos?
@@ -6931,18 +7702,38 @@ Day 4: 100% of users get v2.0
         }
 
         // Smooth scroll for navigation
-        document.querySelectorAll('.nav-link, .nav-dropdown-content a, .agenda-item').forEach(function(link) {
+        document.querySelectorAll('.nav-link, .nav-dropdown-content a, .agenda-item, a[href^="#deep-dive-"]').forEach(function(link) {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const targetId = this.getAttribute('href');
                 const target = document.querySelector(targetId);
                 if (target) {
+                    // If target is a details element, open it
+                    if (target.tagName === 'DETAILS') {
+                        target.setAttribute('open', '');
+                    }
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
                 return false;
             });
         });
+
+        // Auto-open deep dive if URL hash points to one
+        function openDeepDiveFromHash() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#deep-dive-')) {
+                const target = document.querySelector(hash);
+                if (target && target.tagName === 'DETAILS') {
+                    target.setAttribute('open', '');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+        
+        // Run on page load and hash change
+        openDeepDiveFromHash();
+        window.addEventListener('hashchange', openDeepDiveFromHash);
 
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
